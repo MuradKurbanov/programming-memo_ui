@@ -9,8 +9,6 @@ const rootReducer = combineReducers({
   Common,
 });
 
-const Store = createStore(rootReducer, composeWithDevTools(
-    applyMiddleware(),
-));
+const Store = createStore(rootReducer, composeWithDevTools(applyMiddleware()));
 
 export default Store;
