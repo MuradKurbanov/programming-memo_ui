@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from 'react-redux';
 
 import { togglePopup } from '../../store/reducers/common/actions';
-import { getTheme } from '../../store/reducers/content/midlwears';
+import { getTheme } from '../../store/reducers/content/middlewares';
 import content from '../../mock/server-interaction';
 
 import Styles from "./style";
@@ -13,7 +13,8 @@ class ContentContainer extends React.Component {
   };
 
   componentDidMount() {
-    // const url = this.props.location.pathname;
+    const url = this.props.location.pathname;
+    this.props.getTheme(url);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -52,7 +53,7 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getTheme: (url) => getTheme(url),
+  getTheme: (url) => dispatch(getTheme(url)),
   togglePopup: () => dispatch(togglePopup())
 });
 

@@ -1,3 +1,3 @@
+import axios from 'axios';
 
-
-export const getThemeRequest = (url) => fetch(`/${url}`);
+export const getThemeApi = (url) => axios.get(`${url}`);

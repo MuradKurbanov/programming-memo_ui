@@ -1,11 +1,14 @@
-const initialValue = [];
+import  { SAVE_THEME } from './actions';
+
+const initialValue = {};
 
 export const Content = (state = initialValue, action) => {
   switch (action.type) {
-    case 'ADD_TODO':
-      return [
+    case SAVE_THEME:
+      return {
         ...state,
-      ];
+        action
+      };
     default:
       return state
   }

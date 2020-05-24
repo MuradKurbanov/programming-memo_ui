@@ -1,4 +1,4 @@
-import mock from 'xhr-mock';
+import mock, { proxy } from 'xhr-mock';
 
 mock.setup();
 
@@ -8,6 +8,9 @@ const successResponse = body => ({
 });
 
 mock.get(`/theme/server-interaction`, successResponse(require('./server-interaction')));
+
 mock.get(`/theme/javaScript`, successResponse(require('./javaScript')));
 
-mock.get('/', { body: 'Hello World!' });
+mock.get('/', { status: 200, body: 'Hello World!' });
+
+mock.use(proxy);
