@@ -1,0 +1,48 @@
+{
+  "caption": "Архитектуры и паттерны",
+  "url": "architectures-an-patterns",
+  "themes": [
+    {
+      "title": "ООП",
+      "subThemes": {
+        "title": "",
+        "text": "ООП, Модульность, Полиморфизм, Инкапсуляция"
+      }
+    },
+    {
+      "title": "Middleware Selectors",
+      "subThemes": {
+        "title": "",
+        "text": "Middleware Selectors"
+      }
+    },
+    {
+      "title": "single responsibility principle (solid principles)",
+      "subThemes": {
+        "title": "",
+        "text": "principal responsibility Принцип единственной ответсвенности (solid - single responsibility,open-closed, Liskov substitution, interface segregation и dependency inversion)"
+      }
+    },
+    {
+      "title": "mvc",
+      "subThemes": {
+        "title": "",
+        "text": "mvc"
+      }
+    },
+    {
+      "title": "flux",
+      "subThemes": {
+        "title": "",
+        "text": "flux"
+      }
+    },
+    {
+      "title": "patterns",
+      "subThemes": {
+        "title": "",
+        "text": "patterns"
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "caption": "React and Redux",
+  "url": "react-and-redux",
+  "themes": [
+    {
+      "title": "React, hok",
+      "subThemes": {
+        "title": "",
+        "text": "React, hok"
+      }
+    },
+    {
+      "title": "hooks",
+      "subThemes": {
+        "title": "",
+        "text": "hooks"
+      }
+    },
+    {
+      "title": "Redux",
+      "subThemes": {
+        "title": "",
+        "text": "Redux"
+      }
+    },
+    {
+      "title": "key index и почему нужен index",
+      "subThemes": {
+        "title": "",
+        "text": "key index и почему нужен index"
+      }
+    }
+  ]
+}

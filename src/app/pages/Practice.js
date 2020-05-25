@@ -2,10 +2,10 @@ import React from 'react';
 
 import Styles from "./style";
 
-export const About = () => {
+export const Practice = () => {
   return (
     <Styles.Wrapper>
-      <div>About</div>
+      <div>Practice</div>
     </Styles.Wrapper>
   )
 };

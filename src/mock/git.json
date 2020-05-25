@@ -1,0 +1,20 @@
+{
+  "caption": "Git",
+  "url": "git",
+  "themes": [
+    {
+      "title": "различие merge и rebase",
+      "subThemes": {
+        "title": "",
+        "text": "различие merge и rebase"
+      }
+    },
+    {
+      "title": "cherry pick",
+      "subThemes": {
+        "title": "",
+        "text": "cherry pick"
+      }
+    }
+  ]
+}
