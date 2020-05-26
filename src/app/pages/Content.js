@@ -51,6 +51,7 @@ class ContentContainer extends React.Component {
                 <Styles.ParagraphBlock key={i}>
                   <Styles.ParagraphTitle>{subTheme.title}</Styles.ParagraphTitle>
                   <Styles.ParagraphText>{subTheme.text}</Styles.ParagraphText>
+                  {subTheme.code && <Styles.Code name="test" id="" cols="30" rows="10">{subTheme.code}</Styles.Code>}
                 </Styles.ParagraphBlock>
               ))}
             </Styles.Article>
