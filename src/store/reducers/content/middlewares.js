@@ -1,12 +1,23 @@
-import { getThemeApi } from '../../../backend/requests';
-import { saveTheme } from './actions';
+import { getThemeApi, getTechnologiesListApi, addTechnologyApi } from '../../../backend/requests';
+import { saveTheme, getTechnologiesListAction } from './actions';
 
-export const getTheme = (url) => (dispatch) => {
+export const getTheme = (url) => dispatch => {
   getThemeApi(url)
     .then(res => res.data)
     .then(content => dispatch(saveTheme(content)))
     .catch(err => {
-      dispatch(saveTheme({}))
+      dispatch(saveTheme({}));
       return err
     });
+};
+
+export const getTechnologiesList = () => dispatch => {
+  getTechnologiesListApi()
+    .then(res => res.data)
+    .then(technologyList => dispatch(getTechnologiesListAction(technologyList)))
+};
+
+export const addTechnology = (name) => dispatch => {
+  addTechnologyApi(name)
+    .then(dispatch(getTechnologiesList()))
 };

@@ -72,6 +72,35 @@ const Code = styled.textarea`
   font-size: 16px;
 `;
 
+const addBtn = styled.div`
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const addTechnologyBlock = styled.div`
+  width: 500px;
+  height: 500px;
+  background: #ececec;
+`;
+
+const Input = styled.input.attrs(props => ({
+  type: 'text',
+  size: props.small ? 5 : undefined,
+}))`
+  border-radius: 3px;
+  border: 1px solid palevioletred;
+  display: block;
+  margin: 0 0 1em;
+  padding: ${props => props.padding};
+
+  ::placeholder {
+    color: palevioletred;
+  }
+`;
+
 export default {
   Caption,
   Wrapper,
@@ -81,5 +110,8 @@ export default {
   ParagraphBlock,
   ParagraphTitle,
   ParagraphText,
-  Code
+  Code,
+  addBtn,
+  addTechnologyBlock,
+  Input
 }
