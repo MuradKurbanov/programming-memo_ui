@@ -14,7 +14,7 @@ export class Menu extends React.Component {
     <Styles.SubMenu>
       {Object.entries(subMenu).map((item, i) => (
         <Styles.Item key={i}>
-          <Link to={`/theme/${item[0]}`}>{item[1]}</Link>
+          <Link to={`/technology/${item[0]}`}>{item[1]}</Link>
         </Styles.Item>
       ))}
     </Styles.SubMenu>
@@ -28,13 +28,13 @@ export class Menu extends React.Component {
       <Styles.Wrapper>
         <Styles.Menu>
           {Roots.map((root, i) => (
-            root.subMenu ?
+            root.subMenu && root.menu ?
             <Styles.Item key={i} onMouseEnter={this.viewSubmenu} onMouseLeave={this.viewSubmenu}>
-              <div>{root.title}</div>
+              <Link to={`${root.path}`}>{root.title}</Link>
               {isSubMenu && this.submenu()}
             </Styles.Item>
             :
-            <Styles.Item key={i}>
+            root.menu && <Styles.Item key={i}>
               <Link to={`${root.path}`}>{root.title}</Link>
             </Styles.Item>
           ))}

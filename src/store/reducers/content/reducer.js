@@ -1,7 +1,7 @@
-import  { SAVE_THEME } from './actions';
+import  { SAVE_THEME, GET_TECHNOLOGIES_LIST } from './actions';
 
 const initialValue = {
-  content: {}
+  content: {},
 };
 
 export const Content = (state = initialValue, action) => {
@@ -10,6 +10,11 @@ export const Content = (state = initialValue, action) => {
       return {
         ...state,
         content: action.content
+      };
+    case GET_TECHNOLOGIES_LIST:
+      return {
+        ...state,
+        technologyList: action.technologyList
       };
     default:
       return state
