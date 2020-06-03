@@ -17,7 +17,7 @@ export const getTechnologiesList = () => dispatch => {
     .then(technologyList => dispatch(getTechnologiesListAction(technologyList)))
 };
 
-export const addTechnology = (name) => dispatch => {
-  addTechnologyApi(name)
+export const addTechnology = (name, description) => dispatch => {
+  addTechnologyApi(name, description)
     .then(dispatch(getTechnologiesList()))
 };

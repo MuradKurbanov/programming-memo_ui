@@ -4,4 +4,4 @@ export const getThemeApi = (url) => axios.get(`${url}`);
 
 export const getTechnologiesListApi = () => axios.get(`/technologies`);
 
-export const addTechnologyApi = (name) => axios.post(`/technologies`, { name });
+export const addTechnologyApi = (name, description) => axios.post(`/technologies`, { name, description });

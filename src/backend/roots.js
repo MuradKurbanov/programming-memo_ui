@@ -1,7 +1,7 @@
 import { Home } from '../app/pages/Home';
 import { Content } from "../app/pages/Content";
 import { Practice } from '../app/pages/Practice';
-import { TechnologyCatalog } from '../app/pages/TechnologyCatalog';
+import { TechnologyCatalog } from '../app/pages/technologyCatalog/TechnologyCatalog';
 
 export const Roots = [
   {
