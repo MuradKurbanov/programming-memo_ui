@@ -1,7 +1,11 @@
 import React from "react";
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-import { getTechnologiesList, addTechnology } from '../../../store/reducers/content/middlewares';
+import Input from '../../common/input/Input';
+import TextArea from '../../common/textArea/TextArea';
+import Button from '../../common/button/Button';
+import { addTechnology } from '../../../store/reducers/content/middlewares';
 
 import Styles from "./style";
 import CommonStyles from '../style';
@@ -12,22 +16,43 @@ class TechnologyCatalogContainer extends React.Component {
     description: '',
   };
 
-  componentDidMount() {
-    this.props.getTechnologiesList()
-  }
-
-  handleSaveTechnology = () => {
+  handleButton = () => {
     const { name, description } = this.state;
-    this.props.addTechnology(name, description);
+
+    if (name && description) {
+      this.props.addTechnology(name, description);
+      this.setState({ name: '', description: '' });
+    }
+
+    if (!name) this.setState({ requireName: true });
+    else this.setState({ requireName: false });
+
+    if (!description) this.setState({ requireDescription: true });
+    else this.setState({ requireDescription: false });
   };
 
-  handleChangeNameTechnology = (event) => {
-    this.setState({name: event.target.value});
-  };
+  handleChangeName = (event) => this.setState({ name: event.target.value });
 
-  handleChangeDescriptionTechnology = (event) => {
-    this.setState({description: event.target.value});
-  };
+  handleChangeDescription = (event) => this.setState({ description: event.target.value});
+
+  blockForAddingTechnology = () => (
+    <Styles.ItemBlock>
+      <Input
+        require={this.state.requireName}
+        placeholder='Название технологии'
+        value={this.state.name}
+        handleChange={this.handleChangeName}
+      />
+      <TextArea
+        require={this.state.requireDescription}
+        placeholder='Описание технологии'
+        value={this.state.description}
+        handleChange={this.handleChangeDescription}
+      />
+      <Button handleButton={this.handleButton} title='Сохранить' />
+    </Styles.ItemBlock>
+  );
+
 
   render() {
     const { technologyList } = this.props;
@@ -37,24 +62,24 @@ class TechnologyCatalogContainer extends React.Component {
 
         <Styles.CatalogBlock>
           {technologyList && technologyList.map(technology =>
-            <Styles.ItemBlock key={technology._id}>{technology.name}</Styles.ItemBlock>)}
-            <div style={{width: '500px', margin: '20px 50px'}}>
-              <Styles.Input type="text" value={this.state.name} onChange={this.handleChangeNameTechnology}/>
-              <Styles.Textarea value={this.state.description} onChange={this.handleChangeDescriptionTechnology} />
-              <Styles.AddBtn onClick={this.handleSaveTechnology}>Сохранить</Styles.AddBtn>
-            </div>
+            <Styles.ItemBlock key={technology._id}>
+              <Link to={`/technology/${technology._id}`}>
+                <Styles.Name>{technology.name}</Styles.Name>
+                <Styles.Description>{technology.description}</Styles.Description>
+              </Link>
+            </Styles.ItemBlock>
+          )}
+
+          {this.blockForAddingTechnology()}
         </Styles.CatalogBlock>
       </CommonStyles.Wrapper>
     );
   }
 }
 
-const mapStateToProps = store => ({
-  technologyList: store.Content.technologyList
-});
+const mapStateToProps = store => ({ technologyList: store.Content.technologyList });
 
 const mapDispatchToProps = dispatch => ({
-  getTechnologiesList: () => dispatch(getTechnologiesList()),
   addTechnology: (name, description) => dispatch(addTechnology(name, description)),
 });
 

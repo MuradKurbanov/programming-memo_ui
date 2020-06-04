@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const getThemeApi = (url) => axios.get(`${url}`);
+export const getThemeApi = (pathname) => axios.get(`${pathname}`);
 
 export const getTechnologiesListApi = () => axios.get(`/technologies`);
 

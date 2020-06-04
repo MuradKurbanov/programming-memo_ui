@@ -1,10 +1,10 @@
 import { getThemeApi, getTechnologiesListApi, addTechnologyApi } from '../../../backend/requests';
 import { saveTheme, getTechnologiesListAction } from './actions';
 
-export const getTheme = (url) => dispatch => {
+export const getThemes = (url) => dispatch => {
   getThemeApi(url)
     .then(res => res.data)
-    .then(content => dispatch(saveTheme(content)))
+    .then(themes => dispatch(saveTheme(themes)))
     .catch(err => {
       dispatch(saveTheme({}));
       return err

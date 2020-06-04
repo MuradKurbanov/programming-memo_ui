@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import {Roots, subMenu} from '../../backend/roots';
+import {Roots} from '../../../backend/roots';
 
 import Styles from './style';
 
@@ -12,9 +12,9 @@ export class Menu extends React.Component {
 
   submenu = () => (
     <Styles.SubMenu>
-      {Object.entries(subMenu).map((item, i) => (
-        <Styles.Item key={i}>
-          <Link to={`/technology/${item[0]}`}>{item[1]}</Link>
+      {this.props.technologyList && this.props.technologyList.map(technology => (
+        <Styles.Item key={technology._id}>
+          <Link to={`/technology/${technology._id}`}>{technology.name}</Link>
         </Styles.Item>
       ))}
     </Styles.SubMenu>
