@@ -3,29 +3,37 @@ import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
 import { togglePopup } from '../../store/reducers/common/actions';
-import { getTheme } from '../../store/reducers/content/middlewares';
+import { getThemes } from '../../store/reducers/content/middlewares';
 
 import Styles from "./style";
 
 class ContentContainer extends React.Component {
   state = {
-    openTab: null
+    openTab: null,
+    caption: '',
   };
 
   componentDidMount() {
-    const url = this.props.location.pathname;
-    this.props.getTheme(url);
+    this.props.getThemes(this.props.match.url);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    const url = this.props.location.pathname;
+    const { technologyList, match } = this.props;
+    const { caption } = this.state;
+
+    if (!caption && technologyList) {
+      technologyList.forEach(item => item._id === match.params.name &&
+        this.setState({ caption: item.name }))
+    }
 
     if (prevProps.isOpenPopUp !== this.props.isOpenPopUp && !this.props.isOpenPopUp) {
       this.setState({ openTab: null });
     }
 
-    if (url && prevProps.location.pathname !== url) {
-      this.props.getTheme(url);
+    if (match.url && prevProps.match.url !== match.url) {
+      this.props.getThemes(match.url);
+      technologyList.forEach(item => item._id === match.params.name &&
+        this.setState({ caption: item.name }))
     }
   }
 
@@ -35,12 +43,12 @@ class ContentContainer extends React.Component {
   };
 
   render() {
-    const { openTab } = this.state;
+    const { openTab, caption } = this.state;
     const { content } = this.props;
 
     return (
       <div>
-        <Styles.Caption>{!isEmpty(content) && content.caption}</Styles.Caption>
+        <Styles.Caption>{caption}</Styles.Caption>
         <Styles.Wrapper flex>
 
           {!isEmpty(content) && content.themes.map((theme, index) => (
@@ -64,12 +72,13 @@ class ContentContainer extends React.Component {
 }
 
 const mapStateToProps = store => ({
+  technologyList: store.Content.technologyList,
   isOpenPopUp: store.Common.isOpenPopUp,
   content: store.Content.content
 });
 
 const mapDispatchToProps = dispatch => ({
-  getTheme: (url) => dispatch(getTheme(url)),
+  getThemes: (url) => dispatch(getThemes(url)),
   togglePopup: () => dispatch(togglePopup())
 });
 

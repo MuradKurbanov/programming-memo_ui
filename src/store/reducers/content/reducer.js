@@ -1,15 +1,13 @@
 import  { SAVE_THEME, GET_TECHNOLOGIES_LIST } from './actions';
 
-const initialValue = {
-  content: {},
-};
+const initialValue = {};
 
 export const Content = (state = initialValue, action) => {
   switch (action.type) {
     case SAVE_THEME:
       return {
         ...state,
-        content: action.content
+        themes: action.themes
       };
     case GET_TECHNOLOGIES_LIST:
       return {

@@ -36,14 +36,3 @@ export const Roots = [
     menu: true
   },
 ];
-
-export const subMenu = {
-  'server-interaction': 'Взаимодействие с сервером',
-  'java-script': 'JavaScript',
-  'react-and-redux': 'React and Redux',
-  'git': 'Git',
-  'architectures-an-patterns': 'Архитектуры и паттерны',
-  'additional-libraries': 'Дополнительные библиотеки',
-  'type-script': 'TypeScript',
-  'java': 'Java',
-};
