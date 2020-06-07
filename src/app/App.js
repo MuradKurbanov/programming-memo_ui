@@ -6,18 +6,18 @@ import { Menu } from "./common/menu/Menu";
 import { PopUp } from './common/popUp/PopUpManager';
 import { Roots } from '../backend/roots';
 import { GlobalStyle, Container } from './style';
-import { getTechnologiesList } from "../store/reducers/content/middlewares";
+import { getTechnologies } from "../store/reducers/content/middlewares";
 
 class AppContainer extends React.Component {
 
   componentDidMount() {
-    this.props.getTechnologiesList()
+    this.props.getTechnologies()
   }
 
   render() {
     return (
       <Container>
-        <Menu technologyList={this.props.technologyList}/>
+        <Menu technologies={this.props.technologies}/>
         {Roots.map((root, i) => (
           <Route key={i} exact path={`${root.path}`} component={root.component}/>
         ))}
@@ -29,11 +29,11 @@ class AppContainer extends React.Component {
 }
 
 const mapStateToProps = store => ({
-  technologyList: store.Content.technologyList
+  technologies: store.Content.technologies
 });
 
 const mapDispatchToProps = dispatch => ({
-  getTechnologiesList: () => dispatch(getTechnologiesList()),
+  getTechnologies: () => dispatch(getTechnologies()),
 });
 
 export const App = connect(mapStateToProps, mapDispatchToProps)(AppContainer);

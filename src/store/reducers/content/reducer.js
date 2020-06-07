@@ -1,18 +1,28 @@
-import  { SAVE_THEME, GET_TECHNOLOGIES_LIST } from './actions';
+import  { GET_THEMES, GET_TECHNOLOGIES_LIST, ACTIVE_THEME } from './actions';
 
-const initialValue = {};
+const initialValue = {
+  technologyPage: {},
+  activeTheme: {},
+  technologies: [],
+};
 
 export const Content = (state = initialValue, action) => {
   switch (action.type) {
-    case SAVE_THEME:
+    case GET_THEMES:
       return {
         ...state,
-        themes: action.themes
+        technologyPage: action.technologyPage
       };
     case GET_TECHNOLOGIES_LIST:
       return {
         ...state,
-        technologyList: action.technologyList
+        technologies: action.technologies
+      };
+
+    case ACTIVE_THEME:
+      return {
+        ...state,
+        activeTheme: action.activeTheme
       };
     default:
       return state

@@ -1,25 +1,33 @@
 import styled from 'styled-components';
 import plus from '../image/plus_icon.png';
 
+const Wrapper = styled.div`
+  width: 100%;
+  padding: 50px;
+`;
+
 const Caption = styled.div`
   font-size: 25px;
   text-align: center;
   color: black;
-  margin: 30px;
+  margin-bottom: 50px;
 `;
 
-const Wrapper = styled.div`
-  width: 100%;
-  padding: 50px 20px;
-  display: ${({flex}) => flex ? 'flex' : 'block'};
+const Description = styled.div`
+  font-size: 15px;
+  margin-bottom: 30px;
+`;
+
+const Catalog = styled.div`
+  width: auto;
+  display: flex;
   justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
-  position: relative;
 `;
 
 const Article = styled.div`
-  margin: 20px;
+  margin: 0px 25px 25px 0px;
   width: 400px;
   height: 300px;
   padding: 20px;
@@ -48,8 +56,10 @@ const GeneralText = styled.div`
 `;
 
 export default {
-  Caption,
   Wrapper,
+  Caption,
+  Description,
+  Catalog,
   Article,
   AddTheme,
   Title,

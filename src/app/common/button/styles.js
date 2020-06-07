@@ -10,7 +10,18 @@ const Button = styled.div`
   align-items: center;
   cursor: pointer;
   margin: 20px auto;
-`;
+  ${({edit}) => edit} & {
+    width: auto;
+    height: auto;
+    border-radius: 0px;
+    border: none;
+    margin: 0px;
+    margin-right: 30px;
+    margin-top: 30px;
+    :hover {
+      color: silver;
+    }
+  }`;
 
 export default {
   Button
