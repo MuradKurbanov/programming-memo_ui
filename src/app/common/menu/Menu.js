@@ -14,7 +14,7 @@ export class Menu extends React.Component {
     <Styles.SubMenu>
       {this.props.technologyList && this.props.technologyList.map(technology => (
         <Styles.Item key={technology._id}>
-          <Link to={`/technology/${technology._id}`}>{technology.name}</Link>
+          <Link to={`/themes/${technology._id}`}>{technology.name}</Link>
         </Styles.Item>
       ))}
     </Styles.SubMenu>

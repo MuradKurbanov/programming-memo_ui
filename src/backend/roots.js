@@ -18,9 +18,9 @@ export const Roots = [
     subMenu: true,
   },
   {
-    title: 'Технология',
+    title: 'Темы',
     component: Content,
-    path: '/technology/:name',
+    path: '/themes/:name',
     menu: false,
   },
   {

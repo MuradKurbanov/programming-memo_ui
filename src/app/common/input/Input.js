@@ -8,15 +8,17 @@ export default class Input extends React.Component {
   };
 
   render() {
+    const { title } = this.props;
     return (
-      <div>
+      <Styles.InputBloc>
+        {title && <Styles.Title>{title}</Styles.Title>}
         <Styles.Input
           require={this.props.require}
           placeholder={this.props.placeholder}
           type="text"
           value={this.props.value}
           onChange={this.props.handleChange}/>
-      </div>
+      </Styles.InputBloc>
     )
   }
 }

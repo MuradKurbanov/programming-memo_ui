@@ -10,3 +10,4 @@ export const getTechnologiesListAction = (technologyList) => ({
   type: 'GET_TECHNOLOGIES_LIST',
   technologyList
 });
+

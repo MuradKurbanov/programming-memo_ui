@@ -2,6 +2,7 @@ import { TOGGLE_POP } from './actions';
 
 const initialValue = {
   isOpenPopUp: false,
+  childName: '',
 };
 
 export const Common = (state = initialValue, action) => {
@@ -9,7 +10,8 @@ export const Common = (state = initialValue, action) => {
     case TOGGLE_POP:
       return {
         ...state,
-        isOpenPopUp: !state.isOpenPopUp
+        isOpenPopUp: action.boolean,
+        childName: action.childName
       };
     default:
       return state
