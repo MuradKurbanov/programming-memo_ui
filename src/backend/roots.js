@@ -1,7 +1,7 @@
 import { Home } from '../app/pages/Home';
 import { Content } from "../app/pages/Content";
 import { Practice } from '../app/pages/Practice';
-import { TechnologyCatalog } from '../app/pages/technologyCatalog/TechnologyCatalog';
+import { Technologies } from '../app/pages/technologies/Technologies';
 
 export const Roots = [
   {
@@ -12,7 +12,7 @@ export const Roots = [
   },
   {
     title: 'Технологии',
-    component: TechnologyCatalog,
+    component: Technologies,
     path: '/technologies',
     menu: true,
     subMenu: true,

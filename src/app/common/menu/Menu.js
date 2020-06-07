@@ -12,7 +12,7 @@ export class Menu extends React.Component {
 
   submenu = () => (
     <Styles.SubMenu>
-      {this.props.technologyList && this.props.technologyList.map(technology => (
+      {this.props.technologies && this.props.technologies.map(technology => (
         <Styles.Item key={technology._id}>
           <Link to={`/themes/${technology._id}`}>{technology.name}</Link>
         </Styles.Item>

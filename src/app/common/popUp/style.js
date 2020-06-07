@@ -9,7 +9,7 @@ const Bg = styled.div`
   padding-top: 100px;
   cursor: pointer;
   background: #0000009e;
-  position: absolute;
+  position: fixed;
   top: 0;
   z-index: 2;
 `;
@@ -28,6 +28,10 @@ export const Wrapper = styled.div`
   height: 700px;
   padding: 50px;
   background: white;
+`;
+
+export const Flex = styled.div`
+  display: flex;
 `;
 
 export const Title = styled.div`
@@ -51,6 +55,7 @@ export default {
   Bg,
   ClosePop,
   Wrapper,
+  Flex,
   Title,
   Description,
   Example,

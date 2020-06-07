@@ -1,13 +1,17 @@
 import axios from 'axios';
 
-
 // Theme
-export const getThemeApi = (pathname) => axios.get(`/themes/${pathname}`);
+// Get themes by idTechnology
+export const getThemesApi = (idTechnology) => axios.get(`/themes/${idTechnology}`);
 
+// Create new theme with idTechnology
 export const addThemeApi = (theme) => axios.post(`/themes`, theme);
+
+//  Delete theme by id
+export const removeThemeApi = (id) => axios.delete(`/themes/${id}`);
 
 
 // Technology
-export const getTechnologiesListApi = () => axios.get(`/technologies`);
+export const getTechnologiesApi = () => axios.get(`/technologies`);
 
 export const addTechnologyApi = (name, description) => axios.post(`/technologies`, { name, description });

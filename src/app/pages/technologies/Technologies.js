@@ -57,7 +57,7 @@ class TechnologyCatalogContainer extends React.Component {
   };
 
   render() {
-    const { technologyList } = this.props;
+    const { technologies } = this.props;
     return (
       <CommonStyles.Wrapper>
         <CommonStyles.Caption>Каталог технологий</CommonStyles.Caption>
@@ -65,7 +65,7 @@ class TechnologyCatalogContainer extends React.Component {
         <Styles.CatalogBlock>
           {this.blockForAddingTechnology()}
 
-          {technologyList && technologyList.map(technology =>
+          {technologies && technologies.map(technology =>
             <Styles.ItemBlock onClick={() => this.redirect(technology._id)} key={technology._id}>
               <Styles.Name>{technology.name}</Styles.Name>
               <Styles.Description>{technology.description}</Styles.Description>
@@ -77,10 +77,10 @@ class TechnologyCatalogContainer extends React.Component {
   }
 }
 
-const mapStateToProps = store => ({ technologyList: store.Content.technologyList });
+const mapStateToProps = store => ({ technologies: store.Content.technologies });
 
 const mapDispatchToProps = dispatch => ({
   addTechnology: (name, description) => dispatch(addTechnology(name, description)),
 });
 
-export const TechnologyCatalog = connect(mapStateToProps, mapDispatchToProps)(TechnologyCatalogContainer);
+export const Technologies = connect(mapStateToProps, mapDispatchToProps)(TechnologyCatalogContainer);

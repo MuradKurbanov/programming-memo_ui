@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { togglePopup } from "../../../store/reducers/common/actions";
-import { addTheme } from "../../../store/reducers/content/middlewares";
-import NewTheme from "./NewTheme";
+import { addTheme, removeTheme } from "../../../store/reducers/content/middlewares";
+import AddTheme from "./AddTheme";
 
 import Styles from './style'
 import ViewTheme from "./ViewTheme";
@@ -11,10 +11,10 @@ import ViewTheme from "./ViewTheme";
 class PopUpManager extends React.Component {
 
   getChild = (childName) => {
-    const { technologyList, addTheme } = this.props;
+    const { addTheme, idTechnology, activeTheme } = this.props;
     const children = {
-      NEW_THEME: <NewTheme technologyList={technologyList} addTheme={addTheme} closePopUp={this.closePopUp} />,
-      SHOW_THEME: <ViewTheme closePopUp={this.closePopUp}/>
+      NEW_THEME: <AddTheme idTechnology={idTechnology} addTheme={addTheme} closePopUp={this.closePopUp} />,
+      SHOW_THEME: <ViewTheme activeTheme={activeTheme} removeTheme={this.props.removeTheme} closePopUp={this.closePopUp}/>
     };
     return children[`${childName}`]
   };
@@ -34,13 +34,15 @@ class PopUpManager extends React.Component {
 
 const mapStateToProps = (store) => ({
   isOpenPopUp: store.Common.isOpenPopUp,
-  technologyList: store.Content.technologyList,
   childName: store.Common.childName,
+  activeTheme: store.Content.activeTheme,
+  idTechnology: store.Content.technologyPage.idTechnology
 });
 
 const mapDispatchToProps = dispatch => ({
   togglePopup: () => dispatch(togglePopup()),
-  addTheme: (theme) => dispatch(addTheme(theme)),
+  addTheme: theme => dispatch(addTheme(theme)),
+  removeTheme: (id) => dispatch(removeTheme(id))
 });
 
 export const PopUp = connect(mapStateToProps, mapDispatchToProps)(PopUpManager);

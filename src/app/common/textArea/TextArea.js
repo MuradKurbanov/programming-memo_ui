@@ -15,6 +15,7 @@ export default class TextArea extends React.Component {
           placeholder={this.props.placeholder}
           value={this.props.value}
           onChange={this.props.handleChange}
+          readOnly={this.props.readonly}
         />
       </div>
     )

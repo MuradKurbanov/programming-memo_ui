@@ -1,13 +1,21 @@
-export const SAVE_THEME = 'SAVE_THEME';
+export const GET_THEMES = 'GET_THEMES';
 export const GET_TECHNOLOGIES_LIST = 'GET_TECHNOLOGIES_LIST';
+export const ACTIVE_THEME = 'ACTIVE_THEME';
 
-export const saveTheme = (themes) => ({
-  type: 'SAVE_THEME',
-  themes
+export const generateTechnologyPage = (technologyPage) => ({
+  type: 'GET_THEMES',
+  technologyPage
 });
 
-export const getTechnologiesListAction = (technologyList) => ({
+export const getTechnologiesAction = (technologies) => ({
   type: 'GET_TECHNOLOGIES_LIST',
-  technologyList
+  technologies
 });
+
+export const activeTheme = (activeTheme) => ({
+  type: 'ACTIVE_THEME',
+  activeTheme
+});
+
+
 
