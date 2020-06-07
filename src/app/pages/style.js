@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import plus from '../image/plus_icon.png';
 
 const Caption = styled.div`
   font-size: 25px;
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
   width: 100%;
   padding: 50px 20px;
   display: ${({flex}) => flex ? 'flex' : 'block'};
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   position: relative;
@@ -27,19 +28,13 @@ const Article = styled.div`
   background: white;
   overflow: hidden;
   font-size: 16px;
-  ${({open}) => open && `
-    width: calc(100% - 80px);
-    min-height: 500px;
-    height: auto;
-    cursor: default;
-    position: absolute;
-    top: 0;
-    z-index: 3;
-  `}
-  &:hover {
-    background: ${props => props.open ? 'white' : 'black'};
-    color: ${props => props.open ? 'black' : 'white'};
-  }
+`;
+
+const AddTheme = styled.div`
+  width: 40px;
+  height: 40px;
+  background-image: url(${plus});
+  background-size: cover;
 `;
 
 const Title = styled.div`
@@ -52,34 +47,11 @@ const GeneralText = styled.div`
   font-size: 17px;
 `;
 
-const ParagraphBlock = styled.div`
-  margin 50px 0px;
-`;
-
-const ParagraphTitle = styled.div`
-  font-size: 17px;
-  margin-bottom: 10px;
-`;
-
-const ParagraphText = styled.div`
-  margin-bottom: 10px;
-`;
-
-const Code = styled.textarea`
-  width: 100%;
-  padding: 10px;
-  background: #ececec;
-  font-size: 16px;
-`;
-
 export default {
   Caption,
   Wrapper,
   Article,
+  AddTheme,
   Title,
   GeneralText,
-  ParagraphBlock,
-  ParagraphTitle,
-  ParagraphText,
-  Code,
 }

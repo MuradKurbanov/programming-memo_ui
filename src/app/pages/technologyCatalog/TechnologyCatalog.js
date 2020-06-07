@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import Input from '../../common/input/Input';
 import TextArea from '../../common/textArea/TextArea';
@@ -16,7 +15,7 @@ class TechnologyCatalogContainer extends React.Component {
     description: '',
   };
 
-  handleButton = () => {
+  handleClick = () => {
     const { name, description } = this.state;
 
     if (name && description) {
@@ -49,10 +48,13 @@ class TechnologyCatalogContainer extends React.Component {
         value={this.state.description}
         handleChange={this.handleChangeDescription}
       />
-      <Button handleButton={this.handleButton} title='Сохранить' />
+      <Button handleClick={this.handleClick} title='Сохранить' />
     </Styles.ItemBlock>
   );
 
+  redirect = (path) => {
+    this.props.history.push(`/themes/${path}`);
+  };
 
   render() {
     const { technologyList } = this.props;
@@ -61,16 +63,14 @@ class TechnologyCatalogContainer extends React.Component {
         <CommonStyles.Caption>Каталог технологий</CommonStyles.Caption>
 
         <Styles.CatalogBlock>
+          {this.blockForAddingTechnology()}
+
           {technologyList && technologyList.map(technology =>
-            <Styles.ItemBlock key={technology._id}>
-              <Link to={`/technology/${technology._id}`}>
-                <Styles.Name>{technology.name}</Styles.Name>
-                <Styles.Description>{technology.description}</Styles.Description>
-              </Link>
+            <Styles.ItemBlock onClick={() => this.redirect(technology._id)} key={technology._id}>
+              <Styles.Name>{technology.name}</Styles.Name>
+              <Styles.Description>{technology.description}</Styles.Description>
             </Styles.ItemBlock>
           )}
-
-          {this.blockForAddingTechnology()}
         </Styles.CatalogBlock>
       </CommonStyles.Wrapper>
     );

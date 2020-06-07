@@ -2,9 +2,9 @@ import React from 'react';
 
 import Styles from "./styles";
 
-const Button = ({handleButton, title}) => {
+const Button = ({handleClick, title}) => {
   return (
-    <Styles.Button onClick={handleButton}>{title}</Styles.Button>
+    <Styles.Button onClick={handleClick}>{title}</Styles.Button>
   )
 };
 

@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import { connect } from 'react-redux';
 
 import { Menu } from "./common/menu/Menu";
-import { PopUp } from './common/popUp/PopUp';
+import { PopUp } from './common/popUp/PopUpManager';
 import { Roots } from '../backend/roots';
 import { GlobalStyle, Container } from './style';
 import { getTechnologiesList } from "../store/reducers/content/middlewares";

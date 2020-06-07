@@ -1,6 +1,7 @@
-import { getThemeApi, getTechnologiesListApi, addTechnologyApi } from '../../../backend/requests';
+import { getThemeApi, getTechnologiesListApi, addTechnologyApi, addThemeApi } from '../../../backend/requests';
 import { saveTheme, getTechnologiesListAction } from './actions';
 
+// Theme
 export const getThemes = (url) => dispatch => {
   getThemeApi(url)
     .then(res => res.data)
@@ -11,6 +12,12 @@ export const getThemes = (url) => dispatch => {
     });
 };
 
+export const addTheme = (theme) => dispatch => {
+  addThemeApi(theme)
+    .then(dispatch(getThemes(theme.technology._id)))
+};
+
+// Technology
 export const getTechnologiesList = () => dispatch => {
   getTechnologiesListApi()
     .then(res => res.data)

@@ -9,8 +9,8 @@ const CatalogBlock = styled.div`
 `;
 
 const ItemBlock = styled.div`
-  width: 250px;
-  height: 250px;
+  width:300px;
+  height: 300px;
   margin: 20px 10px;
   box-shadow: 0px 0px 6px 0px #000000bf;
   padding: 20px;
