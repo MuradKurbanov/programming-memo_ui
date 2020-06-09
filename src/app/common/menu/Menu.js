@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import {Roots} from '../../../backend/roots';
+import { Roots } from '../../../backend/roots';
 
 import Styles from './style';
 

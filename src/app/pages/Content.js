@@ -4,7 +4,7 @@ import { isEmpty } from 'lodash';
 
 import { togglePopup } from '../../store/reducers/common/actions';
 import { getThemes } from '../../store/reducers/content/middlewares';
-import { activeTheme } from  '../../store/reducers/content/actions';
+import { dataThemeAction } from  '../../store/reducers/content/actions';
 
 import Styles from "./style";
 
@@ -15,28 +15,36 @@ class ContentContainer extends React.Component {
   };
 
   componentDidMount() {
-    this.props.getThemes(this.props.match.params.name);
+    const { match } = this.props;
+
+    this.props.getThemes(match.params.name);
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { technologies, match } = this.props;
-    const { caption, description } = this.state;
 
-    if (prevProps.match.params.name !== match.params.name || !caption || !description) {
+    if (prevProps.match.params.name !== match.params.name) {
       this.props.getThemes(match.params.name);
-      technologies.forEach(item => item._id === match.params.name &&
-        this.setState({ caption: item.name, description: item.description }))
+
     }
+
+   if (!this.state.caption || !this.state.description || prevProps.match.params.name !== match.params.name) {
+     technologies.forEach(item => {
+       if (item['_id'] === match.params.name) {
+         this.setState({ caption: item.name, description: item.description })
+       }
+     })
+   }
   }
 
   addTheme = () => {
-    this.props.togglePopup(true, 'NEW_THEME');
+    this.props.togglePopup(true, 'ADD_THEME');
   };
 
 
   openArticle = (theme) => {
-    this.props.togglePopup(true, 'SHOW_THEME');
-    this.props.activeTheme(theme);
+    this.props.togglePopup(true, 'OPEN_THEME');
+    this.props.dataTheme(theme);
   };
 
   render() {
@@ -52,7 +60,7 @@ class ContentContainer extends React.Component {
            <Styles.AddTheme />
           </Styles.Article>
           {!isEmpty(themes) && themes.map(theme => (
-            <Styles.Article key={theme._id} onClick={() => this.openArticle(theme)}>
+            <Styles.Article key={theme['_id']} onClick={() => this.openArticle(theme)}>
               <Styles.Title>{theme.name}</Styles.Title>
               <Styles.GeneralText>{theme.description}</Styles.GeneralText>
             </Styles.Article>
@@ -65,13 +73,13 @@ class ContentContainer extends React.Component {
 
 const mapStateToProps = store => ({
   technologies: store.Content.technologies,
-  themes: store.Content.technologyPage.themes
+  themes: store.Content.technologyPage.themes,
 });
 
 const mapDispatchToProps = dispatch => ({
   getThemes: (idTechnology) => dispatch(getThemes(idTechnology)),
   togglePopup: (boolean, childName) => dispatch(togglePopup(boolean, childName)),
-  activeTheme: (theme) => dispatch(activeTheme(theme)),
+  dataTheme: (theme) => dispatch(dataThemeAction(theme)),
 });
 
 export const Content = connect(mapStateToProps, mapDispatchToProps)(ContentContainer);
