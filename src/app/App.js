@@ -11,7 +11,7 @@ import { getTechnologies } from "../store/reducers/content/middlewares";
 class AppContainer extends React.Component {
 
   componentDidMount() {
-    this.props.getTechnologies()
+    this.props.getTechnologies('')
   }
 
   render() {
@@ -33,7 +33,7 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getTechnologies: () => dispatch(getTechnologies()),
+  getTechnologies: (id) => dispatch(getTechnologies(id)),
 });
 
 export const App = connect(mapStateToProps, mapDispatchToProps)(AppContainer);

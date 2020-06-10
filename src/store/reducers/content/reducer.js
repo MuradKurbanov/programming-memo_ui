@@ -1,7 +1,8 @@
 import  {
-  GET_THEMES_BY_ID_TECHNOLOGY, GET_TECHNOLOGIES_LIST,
-  OPEN_THEME_DATA, REMOVE_THEME_SUCCESS,
-  UPDATE_THEME_SUCCESS, ADD_THEME_SUCCESS
+  GET_THEMES_SUCCESS, GET_TECHNOLOGIES_LIST,
+  OPEN_THEME_DATA, DELETE_THEME_SUCCESS,
+  UPDATE_THEME_SUCCESS, ADD_THEME_SUCCESS,
+  UPDATE_TECHNOLOGIES_SUCCESS, DELETE_TECHNOLOGY_SUCCESS
 } from './actions';
 
 const initialValue = {
@@ -18,13 +19,23 @@ export const Content = (state = initialValue, action) => {
         technologies: action.technologies
       };
 
+    case UPDATE_TECHNOLOGIES_SUCCESS:
+      return {
+        ...state
+      };
+
+    case DELETE_TECHNOLOGY_SUCCESS:
+      return {
+        ...state
+      };
+
     case OPEN_THEME_DATA:
       return {
         ...state,
         dataTheme: action.dataTheme
       };
 
-    case REMOVE_THEME_SUCCESS:
+    case DELETE_THEME_SUCCESS:
       return {
         ...state
       };
@@ -34,7 +45,7 @@ export const Content = (state = initialValue, action) => {
         ...state
       };
 
-    case GET_THEMES_BY_ID_TECHNOLOGY:
+    case GET_THEMES_SUCCESS:
       return {
         ...state,
         technologyPage: action.technologyPage
