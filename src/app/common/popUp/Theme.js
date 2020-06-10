@@ -38,7 +38,7 @@ export default class Theme extends React.Component {
     const { name, description, example, isEditTheme } = this.state;
 
     if (isEditTheme) {
-      this.props.editTheme(dataTheme['_id'], { name, description, example, technology: { idTechnology } });
+      this.props.updateTheme(dataTheme['_id'], { name, description, example, technology: { idTechnology } });
     } else {
       this.props.addTheme({ name, description, example, technology: { idTechnology } });
     }
@@ -46,7 +46,7 @@ export default class Theme extends React.Component {
     this.props.closePopUp();
   };
 
-  editTheme = () => {
+  updateTheme = () => {
     this.setState({ isEditTheme: true });
   };
 
@@ -64,7 +64,7 @@ export default class Theme extends React.Component {
       <Styles.Description>{this.state.description}</Styles.Description>
       <TextArea readonly value={this.state.example} />
       <Styles.Flex>
-        <Button handleClick={this.editTheme} edit title='Редактировать' />
+        <Button handleClick={this.updateTheme} edit title='Редактировать' />
         <Button handleClick={this.removeTheme} remove title='Удалить' />
       </Styles.Flex>
     </>

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { togglePopup } from "../../../store/reducers/common/actions";
-import { addTheme, removeTheme, editTheme } from "../../../store/reducers/content/middlewares";
+import { addTheme, removeTheme, updateTheme } from "../../../store/reducers/content/middlewares";
 import Theme from "./Theme";
 
 import Styles from './style'
@@ -10,13 +10,13 @@ import Styles from './style'
 class PopUpManager extends React.Component {
 
   getChild = (childName) => {
-    const { addTheme, idTechnology, dataTheme, removeTheme, togglePopup, editTheme } = this.props;
+    const { addTheme, idTechnology, dataTheme, removeTheme, togglePopup, updateTheme } = this.props;
     const children = {
       ADD_THEME:  <Theme idTechnology={idTechnology} addTheme={addTheme} edit closePopUp={this.closePopUp} />,
 
       OPEN_THEME: <Theme idTechnology={idTechnology} dataTheme={dataTheme} removeTheme={removeTheme}
                          addTheme={addTheme} closePopUp={this.closePopUp} togglePopup={togglePopup}
-                         editTheme={editTheme} />,
+                         updateTheme={updateTheme} />,
 
     };
     return children[`${childName}`]
@@ -48,7 +48,7 @@ const mapDispatchToProps = dispatch => ({
   togglePopup: () => dispatch(togglePopup()),
   addTheme: theme => dispatch(addTheme(theme)),
   removeTheme: (id) => dispatch(removeTheme(id)),
-  editTheme: (id, theme) => dispatch(editTheme(id, theme))
+  updateTheme: (id, theme) => dispatch(updateTheme(id, theme))
 });
 
 export const PopUp = connect(mapStateToProps, mapDispatchToProps)(PopUpManager);
