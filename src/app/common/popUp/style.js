@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import close_icon from "../../image/close_icon.png";
+import close_icon from '../../image/close_icon.png';
+import plus_icon from '../../image/plus_icon.png';
 
 const Bg = styled.div`
   width: 100%;
@@ -28,6 +29,7 @@ export const Wrapper = styled.div`
   height: 700px;
   padding: 50px;
   background: white;
+  overflow: scroll;
 `;
 
 export const Flex = styled.div`
@@ -35,9 +37,10 @@ export const Flex = styled.div`
 `;
 
 export const Title = styled.div`
+  height: 20px;
   text-align: center;
   font-size: 17px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
 
 const Description = styled.div`
@@ -51,6 +54,21 @@ const Example = styled.textarea`
   font-size: 16px;
 `;
 
+const SubTheme = styled.div`
+  margin-top: 20px;
+  display: flex;
+  font-size: 15px;
+`;
+
+const Plus = styled.div`
+  width: 20px;
+  height: 20px;
+  background-image: url(${plus_icon});
+  background-size: cover;
+  margin-right: 10px;
+`;
+
+
 export default {
   Bg,
   ClosePop,
@@ -59,4 +77,6 @@ export default {
   Title,
   Description,
   Example,
+  SubTheme,
+  Plus
 }

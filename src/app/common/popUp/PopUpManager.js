@@ -10,20 +10,15 @@ import Styles from './style'
 class PopUpManager extends React.Component {
 
   getChild = (childName) => {
-    const { addTheme, idTechnology, dataTheme, removeTheme, togglePopup, updateTheme } = this.props;
+    const { addTheme, idTechnology, theme, removeTheme, updateTheme, togglePopup } = this.props;
     const children = {
-      ADD_THEME:  <Theme idTechnology={idTechnology} addTheme={addTheme} edit closePopUp={this.closePopUp} />,
+      ADD_THEME:  <Theme idTechnology={idTechnology} addTheme={addTheme} togglePopup={togglePopup} />,
 
-      OPEN_THEME: <Theme idTechnology={idTechnology} dataTheme={dataTheme} removeTheme={removeTheme}
-                         addTheme={addTheme} closePopUp={this.closePopUp} togglePopup={togglePopup}
-                         updateTheme={updateTheme} />,
+      OPEN_THEME: <Theme idTechnology={idTechnology} theme={theme} removeTheme={removeTheme}
+                         togglePopup={togglePopup} updateTheme={updateTheme} />,
 
     };
     return children[`${childName}`]
-  };
-
-  closePopUp = () => {
-    this.props.togglePopup(false);
   };
 
   render() {
@@ -40,8 +35,8 @@ class PopUpManager extends React.Component {
 const mapStateToProps = (store) => ({
   isOpenPopUp: store.Common.isOpenPopUp,
   childName: store.Common.childName,
-  dataTheme: store.Content.dataTheme,
-  idTechnology: store.Content.technologyPage.idTechnology
+  theme: store.Content.technologyPage.activeTheme,
+  idTechnology: store.Content.technologyPage.technology.idTechnology
 });
 
 const mapDispatchToProps = dispatch => ({

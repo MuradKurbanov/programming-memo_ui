@@ -8,25 +8,25 @@ export const GET_TECHNOLOGIES_LIST = 'GET_TECHNOLOGIES_LIST';
 export const UPDATE_TECHNOLOGIES_SUCCESS = 'UPDATE_TECHNOLOGIES_SUCCESS';
 export const DELETE_TECHNOLOGY_SUCCESS = 'DELETE_TECHNOLOGY_SUCCESS';
 
-export const getThemesSuccess = (technologyPage) => ({
+export const getThemesSuccess = (technology) => ({
   type: 'GET_THEMES_SUCCESS',
-  technologyPage
+  technology
 });
 
-export const dataThemeAction = (dataTheme) => ({
+export const openDataTheme = (theme) => ({
   type: 'OPEN_THEME_DATA',
-  dataTheme
+  theme
 });
 
-export const removeThemeActionSuccess = () => ({
+export const removeThemeSuccess = () => ({
   type: 'DELETE_THEME_SUCCESS'
 });
 
-export const updateThemeActionSuccess = () => ({
+export const updateThemeSuccess = () => ({
   type: 'UPDATE_THEME_SUCCESS'
 });
 
-export const addThemeActionSuccess = () => ({
+export const addThemeSuccess = () => ({
   type: 'ADD_THEME_SUCCESS'
 });
 

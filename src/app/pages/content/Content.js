@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
-import { togglePopup } from '../../store/reducers/common/actions';
-import { getThemes } from '../../store/reducers/content/middlewares';
-import { dataThemeAction } from  '../../store/reducers/content/actions';
+import { togglePopup } from '../../../store/reducers/common/actions';
+import { getThemes } from '../../../store/reducers/content/middlewares';
+import { openDataTheme } from '../../../store/reducers/content/actions';
 
 import Styles from "./style";
 
@@ -28,13 +28,10 @@ class ContentContainer extends React.Component {
 
     }
 
-   if (!this.state.caption || !this.state.description || prevProps.match.params.name !== match.params.name) {
-     technologies.forEach(item => {
-       if (item['_id'] === match.params.name) {
-         this.setState({ caption: item.name, description: item.description })
-       }
-     })
-   }
+    if (!this.state.caption || !this.state.description || prevProps.match.params.name !== match.params.name) {
+      technologies.forEach(item => item['_id'] === match.params.name &&
+         this.setState({ caption: item.name, description: item.description }))
+    }
   }
 
   addTheme = () => {
@@ -44,7 +41,7 @@ class ContentContainer extends React.Component {
 
   openArticle = (theme) => {
     this.props.togglePopup(true, 'OPEN_THEME');
-    this.props.dataTheme(theme);
+    this.props.openDataTheme(theme);
   };
 
   render() {
@@ -73,13 +70,13 @@ class ContentContainer extends React.Component {
 
 const mapStateToProps = store => ({
   technologies: store.Content.technologies,
-  themes: store.Content.technologyPage.themes,
+  themes: store.Content.technologyPage.technology.themes,
 });
 
 const mapDispatchToProps = dispatch => ({
   getThemes: (idTechnology) => dispatch(getThemes(idTechnology)),
   togglePopup: (boolean, childName) => dispatch(togglePopup(boolean, childName)),
-  dataTheme: (theme) => dispatch(dataThemeAction(theme)),
+  openDataTheme: (theme) => dispatch(openDataTheme(theme)),
 });
 
 export const Content = connect(mapStateToProps, mapDispatchToProps)(ContentContainer);
