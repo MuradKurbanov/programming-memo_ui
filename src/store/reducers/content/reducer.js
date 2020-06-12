@@ -6,8 +6,10 @@ import  {
 } from './actions';
 
 const initialValue = {
-  technologyPage: {},
-  dataTheme: {},
+  technologyPage: {
+    activeTheme: {},
+    technology: {}
+  },
   technologies: [],
 };
 
@@ -32,29 +34,44 @@ export const Content = (state = initialValue, action) => {
     case OPEN_THEME_DATA:
       return {
         ...state,
-        dataTheme: action.dataTheme
+        technologyPage: {
+          ...state.technologyPage,
+          activeTheme: action.theme
+        }
       };
 
     case DELETE_THEME_SUCCESS:
       return {
-        ...state
+        ...state,
+        technologyPage: {
+          ...state.technologyPage,
+          activeTheme: {}
+        }
       };
 
     case UPDATE_THEME_SUCCESS:
       return {
-        ...state
+        ...state,
+        technologyPage: {
+          ...state.technologyPage,
+          activeTheme: {}
+        }
       };
 
     case GET_THEMES_SUCCESS:
       return {
         ...state,
-        technologyPage: action.technologyPage
+        technologyPage: {
+          ...state.technologyPage,
+          technology: action.technology
+        }
       };
 
     case ADD_THEME_SUCCESS:
       return {
         ...state
       };
+
     default:
       return state
   }

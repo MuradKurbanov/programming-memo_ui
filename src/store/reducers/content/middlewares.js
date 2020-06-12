@@ -1,14 +1,10 @@
 import {
-  getThemesApi, getTechnologiesApi,
-  addTechnologyApi, addThemeApi,
-  removeThemeApi, editThemeApi,
-  editTechnologyApi, deleteTechnologyApi
+  getThemesApi, getTechnologiesApi, addTechnologyApi, addThemeApi,
+  removeThemeApi, editThemeApi, editTechnologyApi, deleteTechnologyApi
 } from '../../../backend/requests';
 import {
-  getThemesSuccess, getTechnologiesAction,
-  addThemeActionSuccess, updateThemeActionSuccess,
-  removeThemeActionSuccess, updateTechnologySuccess,
-  deleteTechnologySuccess
+  getThemesSuccess, getTechnologiesAction, addThemeSuccess, updateThemeSuccess,
+  removeThemeSuccess, updateTechnologySuccess, deleteTechnologySuccess
 } from './actions';
 import { togglePopup } from '../common/actions';
 
@@ -37,30 +33,32 @@ export const deleteTechnology = (id) => (dispatch) => {
 };
 
 // Themes
-export const getThemes = idTechnology => (dispatch) => {
+export const getThemes = (idTechnology) => dispatch => {
   getThemesApi(idTechnology)
     .then(res => res.data)
     .then(themes => dispatch(getThemesSuccess({themes: [...themes], idTechnology })))
 };
 
 export const addTheme = (theme) => (dispatch, getStore) => {
-  const idTechnology = getStore().Content.technologyPage.idTechnology;
+  const idTechnology = getStore().Content.technologyPage.technology.idTechnology;
   addThemeApi(theme)
-    .then(dispatch(addThemeActionSuccess()))
+    .then(dispatch(addThemeSuccess()))
+    .then(dispatch(togglePopup()))
     .then(dispatch(getThemes(idTechnology)))
 };
 
 export const removeTheme = (id) => (dispatch, getStore) => {
-  const idTechnology = getStore().Content.technologyPage.idTechnology;
+  const idTechnology = getStore().Content.technologyPage.technology.idTechnology;
   removeThemeApi(id)
-    .then(res => res.result && dispatch(removeThemeActionSuccess()))
-    .then(dispatch(togglePopup(false)))
+    .then(dispatch(removeThemeSuccess()))
+    .then(dispatch(togglePopup()))
     .then(dispatch(getThemes(idTechnology)))
 };
 
 export const updateTheme = (id, theme) => (dispatch, getStore) => {
-  const idTechnology = getStore().Content.technologyPage.idTechnology;
+  const idTechnology = getStore().Content.technologyPage.technology.idTechnology;
   editThemeApi(id, theme)
-    .then(dispatch(updateThemeActionSuccess()))
+    .then(dispatch(updateThemeSuccess()))
+    .then(dispatch(togglePopup()))
     .then(dispatch(getThemes(idTechnology)))
 };

@@ -23,12 +23,24 @@ export const GlobalStyle = createGlobalStyle`
     justify-content: center;
     position: relative;
   }
-
 `;
 
 export const Container = styled.div`
   max-width: 2100px;
+  min-width: 320px;
   width: 100%;
   height: auto;
   position: relative;
+`;
+
+export const Wrapper = styled.div`
+  width: 100%;
+  padding: 50px;
+`;
+
+export const Caption = styled.div`
+  font-size: 25px;
+  text-align: center;
+  color: black;
+  margin-bottom: 50px;
 `;

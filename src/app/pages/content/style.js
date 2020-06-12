@@ -1,17 +1,6 @@
 import styled from 'styled-components';
-import plus from '../image/plus_icon.png';
-
-const Wrapper = styled.div`
-  width: 100%;
-  padding: 50px;
-`;
-
-const Caption = styled.div`
-  font-size: 25px;
-  text-align: center;
-  color: black;
-  margin-bottom: 50px;
-`;
+import { Wrapper, Caption } from '../../style';
+import plus from "../../image/plus_icon.png";
 
 const Description = styled.div`
   font-size: 15px;
@@ -58,10 +47,10 @@ const GeneralText = styled.div`
 export default {
   Wrapper,
   Caption,
-  Description,
   Catalog,
   Article,
   AddTheme,
   Title,
   GeneralText,
+  Description
 }

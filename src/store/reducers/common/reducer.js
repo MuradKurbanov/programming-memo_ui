@@ -7,12 +7,14 @@ const initialValue = {
 
 export const Common = (state = initialValue, action) => {
   switch (action.type) {
+
     case TOGGLE_POP:
       return {
         ...state,
         isOpenPopUp: action.boolean,
         childName: action.childName
       };
+
     default:
       return state
   }

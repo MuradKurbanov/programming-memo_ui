@@ -1,6 +1,6 @@
-import { Home } from '../app/pages/Home';
-import { Content } from "../app/pages/Content";
-import { Practice } from '../app/pages/Practice';
+import { Home } from '../app/pages/home/Home';
+import { Content } from "../app/pages/content/Content";
+import { Practice } from '../app/pages/practice/Practice';
 import { Technologies } from '../app/pages/technologies/Technologies';
 
 export const Roots = [
@@ -24,7 +24,7 @@ export const Roots = [
     menu: false,
   },
   {
-    title: 'Задачи на собесодовании',
+    title: 'Практические задачи',
     component: Practice,
     path: '/practice',
     menu: true

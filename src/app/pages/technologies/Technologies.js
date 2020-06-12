@@ -7,7 +7,6 @@ import Button from '../../common/button/Button';
 import { addTechnology, updateTechnology, deleteTechnology } from '../../../store/reducers/content/middlewares';
 
 import Styles from "./style";
-import CommonStyles from '../style';
 
 class TechnologyCatalogContainer extends React.Component {
   state = {
@@ -34,27 +33,13 @@ class TechnologyCatalogContainer extends React.Component {
     else this.setState({ requireDescription: false });
   };
 
-  handleChangeName = (event) => this.setState({ name: event.target.value });
+  handleChangeName = (event) => {
+    this.setState({ name: event.target.value });
+  };
 
-  handleChangeDescription = (event) => this.setState({ description: event.target.value});
-
-  blockForAddingTechnology = () => (
-    <Styles.ItemBlock>
-      <Input
-        require={this.state.requireName}
-        placeholder='Название технологии'
-        value={this.state.name}
-        handleChange={this.handleChangeName}
-      />
-      <TextArea
-        require={this.state.requireDescription}
-        placeholder='Описание технологии'
-        value={this.state.description}
-        handleChange={this.handleChangeDescription}
-      />
-      <Button title='Сохранить' handleClick={this.handleClick} />
-    </Styles.ItemBlock>
-  );
+  handleChangeDescription = (event) => {
+    this.setState({ description: event.target.value});
+  };
 
   open = (path) => {
     this.props.history.push(`/themes/${path}`);
@@ -69,12 +54,29 @@ class TechnologyCatalogContainer extends React.Component {
     this.setState({ idTechnology: _id, name, description });
   };
 
+  blockForAddingTechnology = () =>
+    <Styles.ItemBlock>
+      <Input
+        require={this.state.requireName}
+        placeholder='Название технологии'
+        value={this.state.name}
+        handleChange={this.handleChangeName}
+      />
+      <TextArea
+        require={this.state.requireDescription}
+        placeholder='Описание технологии'
+        value={this.state.description}
+        handleChange={this.handleChangeDescription}
+      />
+      <Button title='Сохранить' handleClick={this.handleClick} />
+    </Styles.ItemBlock>;
+
   render() {
     const { technologies } = this.props;
 
     return (
-      <CommonStyles.Wrapper>
-        <CommonStyles.Caption>Каталог технологий</CommonStyles.Caption>
+      <Styles.Wrapper>
+        <Styles.Caption>Каталог технологий</Styles.Caption>
 
         <Styles.CatalogBlock>
           {this.blockForAddingTechnology()}
@@ -91,7 +93,7 @@ class TechnologyCatalogContainer extends React.Component {
             </Styles.ItemBlock>
           )}
         </Styles.CatalogBlock>
-      </CommonStyles.Wrapper>
+      </Styles.Wrapper>
     );
   }
 }

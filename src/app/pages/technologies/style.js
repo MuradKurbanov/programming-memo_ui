@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Wrapper, Caption } from '../../style';
 
 const CatalogBlock = styled.div`
   margin: 50px auto;
@@ -38,6 +39,8 @@ const Description = styled.div`
 `;
 
 export default {
+  Wrapper,
+  Caption,
   CatalogBlock,
   ItemBlock,
   Name,
