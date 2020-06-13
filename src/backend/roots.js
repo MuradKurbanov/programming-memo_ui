@@ -5,10 +5,10 @@ import { Technologies } from '../app/pages/technologies/Technologies';
 
 export const Roots = [
   {
-    title: 'Главная',
+    title: 'PM',
     component: Home,
     path: '/',
-    menu: true
+    menu: false
   },
   {
     title: 'Технологии',
@@ -24,15 +24,36 @@ export const Roots = [
     menu: false,
   },
   {
-    title: 'Практические задачи',
+    title: 'Практика',
     component: Practice,
     path: '/practice',
     menu: true
   },
   {
-    title: 'Ссылка на GitHub',
+    title: 'О проекте',
     component: '',
-    path: '',
+    path: '/',
     menu: true
+  },
+  {
+    title: 'Gh',
+    component: '',
+    path: '/',
+    menu: false,
+    socialNetwork: true
+  },
+  {
+    title: 'Tw',
+    component: '',
+    path: '/',
+    menu: false,
+    socialNetwork: true
+  },
+  {
+    title: 'Fb',
+    component: '',
+    path: '/',
+    menu: false,
+    socialNetwork: true
   },
 ];

@@ -1,42 +1,41 @@
 import styled from 'styled-components';
-
-const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  padding: 30px 50px;
-  z-index: 1;
-`;
+import { Wrapper, Flex } from '../../style';
 
 const Menu = styled.div`
-  width: 600px;
-  display: flex;
-  justify-content: space-between;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  > a {
+    height: 22px;
+    min-width: 100px;
+    margin-bottom: 20px;
+    transition: border-width 0.8s linear;
+    &:hover {
+      border-bottom: solid 1px;
+      border-width: 10px;
+    }
+  }
 `;
 
 const SubMenu = styled.div`
+  display: flex;
+  flex-direction: column;
   position: absolute;
-  background: white;
   z-index: 2;
-  padding-top: 5px;
-`;
-
-const Item = styled.div`
-  font-size: 16px;
-  margin: 3px 0px;
+  left: -99%;
   > a {
-    color: black;
-    text-decoration: none;
+    height: 22px;
+    min-width: 100px;
+    margin-bottom: 20px;
     &:hover {
-      color: green;
+      text-decoration: underline;
     }
   }
 `;
 
 export default {
   Wrapper,
+  Flex,
   Menu,
   SubMenu,
-  Item
 }

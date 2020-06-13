@@ -1,8 +1,11 @@
-import { TOGGLE_POP } from './actions';
+import { TOGGLE_POP, WRAPPER_BACKGROUND } from './actions';
 
 const initialValue = {
-  isOpenPopUp: false,
-  childName: '',
+  popUp: {
+    isOpenPopUp: false,
+    childName: '',
+  },
+  isWrapperBlack: false
 };
 
 export const Common = (state = initialValue, action) => {
@@ -11,8 +14,16 @@ export const Common = (state = initialValue, action) => {
     case TOGGLE_POP:
       return {
         ...state,
-        isOpenPopUp: action.boolean,
-        childName: action.childName
+        popUp: {
+          isOpenPopUp: action.boolean,
+          childName: action.childName
+        }
+      };
+
+    case WRAPPER_BACKGROUND:
+      return {
+        ...state,
+        isWrapperBlack: action.boolean
       };
 
     default:
