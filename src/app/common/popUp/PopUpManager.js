@@ -22,10 +22,10 @@ class PopUpManager extends React.Component {
   };
 
   render() {
-    const { childName } = this.props;
+    const { childName, isOpenPopUp } = this.props;
 
     return (
-      <Styles.Bg open={this.props.isOpenPopUp}>
+      <Styles.Bg open={isOpenPopUp}>
         {childName && this.getChild(childName)}
       </Styles.Bg>
     )
@@ -33,8 +33,8 @@ class PopUpManager extends React.Component {
 }
 
 const mapStateToProps = (store) => ({
-  isOpenPopUp: store.Common.isOpenPopUp,
-  childName: store.Common.childName,
+  isOpenPopUp: store.Common.popUp.isOpenPopUp,
+  childName: store.Common.popUp.childName,
   theme: store.Content.technologyPage.activeTheme,
   idTechnology: store.Content.technologyPage.technology.idTechnology
 });

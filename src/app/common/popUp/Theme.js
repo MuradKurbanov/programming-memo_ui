@@ -77,10 +77,10 @@ export default class Theme extends React.Component {
     this.setState({ subThemes: [...this.state.subThemes, { subName: '', subDescription: '', subExample: '' }] });
   };
 
-  runCode = () => {
-    const example = new Function(this.state.code);
-    example();
-  };
+  // runCode = () => {
+  //   const example = new Function(this.state.code);
+  //   example();
+  // };
 
   onChange = (newValue) => {
     console.log("change", newValue);
@@ -115,7 +115,7 @@ export default class Theme extends React.Component {
           }}
         />
 
-        <Button title='run' handleClick={this.runCode} />
+        {/*<Button title='run' handleClick={this.runCode} />*/}
 
         {/*<TextArea placeholder='Пример кода' value={example} handleChange={this.handleChangeExample}/>*/}
 
