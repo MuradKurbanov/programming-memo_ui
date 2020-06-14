@@ -15,5 +15,4 @@ const Input = ({title, require, placeholder, value, handleChange, autoFocus}) =>
     />
   </Styles.InputBloc>
 );
-
 export default Input;

@@ -1,48 +1,68 @@
 import styled from 'styled-components';
-import { Wrapper, Caption } from '../../style';
+import { Wrapper, Caption, Palette, Flex } from '../../style';
 
-const CatalogBlock = styled.div`
-  margin: 50px auto;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  flex-wrap: wrap;
+const Left = styled.div`
+  margin-top: 100px;
+  margin-left: 100px;
+  padding-right: 40px;
+  border-right: 2px solid #dcdcdc;
+  position: fixed;
 `;
 
-const ItemBlock = styled.div`
-  width:300px;
-  height: 300px;
-  margin: 20px 10px;
-  box-shadow: 0px 0px 6px 0px #000000bf;
-  padding: 20px;
-  transition: box-shadow 0.4s linear;
+const Right = styled.div`
+  margin-left: 300px;
+`;
+
+const TechnoLink = styled.div`
+  color: ${Palette.darkBlack};
+  margin-bottom: 20px;
   cursor: pointer;
-  color: black;
-  & > a {
-    color: black;
-    text-decoration: none;
+  :hover {
+    color: ${Palette.purple};
   }
-  &:hover {
-    box-shadow: ${({btn}) => btn ? '0px 0px 6px 0px #5aa264bf' : '0px 0px 6px 0px #cacaca'}
-  }
+`;
+
+const TechnoBlock = styled.div`
+  max-width: 800px;
+  height: 200px;
+  margin-bottom: 60px;
+  box-shadow: 0px 0px 6px 0px #dcdcdc;
+  overflow: hidden;
+  padding: 15px;
 `;
 
 const Name = styled.div`
-  font-size: 17px;
-  text-align: center;
-  margin-top: 20px;
+  color: ${Palette.darkBlack};
+  font-size: 29px;
+  margin-bottom: 40px;
+  cursor: pointer;
+  :hover {
+    color: ${Palette.purple};
+  }
 `;
 
 const Description = styled.div`
+  color: ${Palette.darkSilver};
   font-size: 15px;
-  margin-top: 50px;
+  margin-bottom: 20px;
+  > span {
+    color: ${Palette.lightBlack};
+    text-decoration: underline;
+    padding-left: 5px;
+    :hover {
+      color: ${Palette.purple};
+    }
+  }
 `;
 
 export default {
   Wrapper,
   Caption,
-  CatalogBlock,
-  ItemBlock,
+  Flex,
+  Left,
+  Right,
+  TechnoLink,
+  TechnoBlock,
   Name,
   Description
 }

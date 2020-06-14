@@ -1,19 +1,47 @@
 import styled, { keyframes } from 'styled-components';
-import { Wrapper, Caption, Flex, Palette } from '../../style';
+import { Wrapper, Flex, Palette } from '../../style';
 
-const InputText = keyframes`
-  from { width: 0px }
-  to { width: -325px }
+const text = styled.div`
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -.035em;
 `;
 
-const Animation = styled.div`
-  width: 770px;
-  margin-top: 200px;
-  font-size: 54px;
+const StaticTitle = styled(text)`
+  color: ${Palette.purple};
+`;
+
+const blockExtension = keyframes`
+  40% { max-width: 900px; } 
+  65% { max-width: 900px; } 
+  75% { max-width: 900px; } 
+  100% { max-width: 0px; }
+`;
+
+const Animation = styled(text)`
+  max-width: 0px;
+  width: auto;
   white-space: nowrap;
   overflow: hidden;
-  animation: ${InputText} 3s steps(50, end);
   color: ${Palette.white};
+  animation: ${blockExtension} 4s steps(50, end);
+  > span {
+     color: ${Palette.purple};
+  }
+`;
+
+const finalBlockExtension = keyframes`
+  from { max-width: 0px; }
+`;
+
+const FinalAnimation = styled(text)`
+  max-width: 900px;
+  width: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  color: ${Palette.white};
+  animation: ${finalBlockExtension} 1.7s steps(50, end);
 `;
 
 const CursorRepeat = keyframes`
@@ -24,17 +52,18 @@ const CursorRepeat = keyframes`
 
 const Cursor = styled.div`
   width: 12px;
-  height: 43px;
-  margin-left: 5px;
-  margin-bottom: 5px;
+  height: 50px;
+  margin: 10px 0px;
+  margin-left: 15px;
   background: ${Palette.white};
-  animation: ${CursorRepeat} 1.2s linear 3.2s infinite;
+  animation: ${CursorRepeat} 1.2s linear 5s infinite;
 `;
 
 export default {
   Wrapper,
-  Caption,
   Flex,
+  StaticTitle,
   Animation,
+  FinalAnimation,
   Cursor
 };

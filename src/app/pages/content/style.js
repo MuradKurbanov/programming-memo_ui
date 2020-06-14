@@ -1,56 +1,50 @@
 import styled from 'styled-components';
-import { Wrapper, Caption } from '../../style';
-import plus from "../../image/plus_icon.png";
+import { Wrapper, Caption, Flex, Palette } from '../../style';
 
 const Description = styled.div`
+  max-width: 700px;
   font-size: 15px;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 `;
 
-const Catalog = styled.div`
-  width: auto;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-wrap: wrap;
-`;
-
-const Article = styled.div`
-  margin: 0px 25px 25px 0px;
-  width: 400px;
-  height: 300px;
-  padding: 20px;
-  box-shadow: 0px 0px 15px -5px rgba(0,0,0,0.75);
+const Theme = styled(Flex)`
+  max-width: 700px;
+  min-height: 60px;
+  height: auto;
+  border-top: 1px solid;
+  justify-content: space-between;
+  padding: 0px 20px;
   cursor: pointer;
-  background: white;
-  overflow: hidden;
-  font-size: 16px;
+  color: ${Palette.darkSilver};
+  border-bottom: ${({borderBottom}) => borderBottom && '1px solid'};
+  transition: 0.2s linear;
+  > span {
+    font-weight: 300;
+  }
+  :hover {
+    color: ${Palette.darkBlack};
+  }
 `;
 
-const AddTheme = styled.div`
-  width: 40px;
-  height: 40px;
-  background-image: url(${plus});
-  background-size: cover;
-`;
-
-const Title = styled.div`
-  font-size: 19px;
-  margin-bottom: 80px;
-`;
-
-const GeneralText = styled.div`
-  margin: 40px 0px;
+export const Title = styled.div`
+  height: 20px;
+  text-align: center;
   font-size: 17px;
+  margin-bottom: 20px;
+`;
+
+const SubTheme = styled.div`
+  margin-top: 20px;
+  display: flex;
+  font-size: 15px;
 `;
 
 export default {
   Wrapper,
   Caption,
-  Catalog,
-  Article,
-  AddTheme,
+  Flex,
+  Description,
+  Theme,
   Title,
-  GeneralText,
-  Description
+  SubTheme,
 }

@@ -1,16 +1,23 @@
-import React from 'react';
+import React from "react";
+import { connect } from 'react-redux';
+import { isEmpty } from 'lodash';
 import AceEditor from "react-ace";
 
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/theme-monokai";
+import { togglePopup } from '../../../store/reducers/common/actions';
+import TextArea from "../../common/textArea/TextArea";
+import Button from "../../common/button/Button";
+import Input from "../../common/input/Input";
+import {getThemes, removeTheme, updateTheme} from '../../../store/reducers/content/middlewares';
+import { openDataTheme } from '../../../store/reducers/content/actions';
 
-import Button from '../button/Button';
-import Input from "../input/Input";
-import TextArea from "../textArea/TextArea";
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/theme-twilight";
+import "ace-builds/src-noconflict/ext-language_tools";
+import "ace-builds/src-noconflict/snippets/javascript";
 
 import Styles from "./style";
 
-export default class Theme extends React.Component {
+class ThemeComponent extends React.Component {
   state = {
     name: '',
     description: '',
@@ -20,7 +27,7 @@ export default class Theme extends React.Component {
   };
 
   componentDidMount() {
-    if (this.props.theme) {
+    if (!isEmpty(this.props.theme)) {
       const { name, description, example, subThemes } = this.props.theme;
       this.setState({ name, description, example, subThemes });
     }
@@ -40,8 +47,8 @@ export default class Theme extends React.Component {
 
   handleChangeSubName = (event, id) => {
     this.setState({
-        subThemes: this.state.subThemes.map((subTheme, i) => i === id ?
-         { ...subTheme, subName: event.target.value } : subTheme)
+      subThemes: this.state.subThemes.map((subTheme, i) => i === id ?
+        { ...subTheme, subName: event.target.value } : subTheme)
     })
   };
 
@@ -77,49 +84,43 @@ export default class Theme extends React.Component {
     this.setState({ subThemes: [...this.state.subThemes, { subName: '', subDescription: '', subExample: '' }] });
   };
 
-  // runCode = () => {
-  //   const example = new Function(this.state.code);
+  // onChange = newValue => {
+  //   const example = new Function(newValue);
   //   example();
   // };
 
-  onChange = (newValue) => {
-    console.log("change", newValue);
-  };
-
   addOrEditTheme = () => {
     const { name, description, example, subThemes } = this.state;
-
     return (
       <>
         <Styles.Title>{name}</Styles.Title>
         <Input autoFocus placeholder='Название темы' value={name} handleChange={this.handleChangeName}/>
         <TextArea placeholder='Описание темы' value={description} handleChange={this.handleChangeDescription}/>
-        <AceEditor
-          mode="javascript"
-          theme="monokai"
-          onChange={this.onChange}
-          defaultValue={example}
-          placeholder='Пример кода'
-          fontSize={16}
-          style={{marginTop: '20px'}}
-          width='100%'
-          height='450px'
-          name="EXAMPLE_CODE"
-          editorProps={{ $blockScrolling: true }}
-          setOptions={{
-            enableBasicAutocompletion: true,
-            enableLiveAutocompletion: true,
-            enableSnippets: true,
-            showLineNumbers: true,
-            tabSize: 2,
-          }}
-        />
+        <Styles.Flex justifyContent='flex-start'>
+          <AceEditor
+            mode="javascript"
+            theme="twilight"
+            onChange={this.onChange}
+            defaultValue={example}
+            placeholder='example code'
+            fontSize={16}
+            style={{marginTop: '20px'}}
+            width='800px'
+            height='450px'
+            name="EXAMPLE_CODE"
+            editorProps={{ $blockScrolling: Infinity }}
+            enableBasicAutocompletion={true}
+            enableLiveAutocompletion={true}
+            enableSnippets={true}
+            setOptions={{
+              showLineNumbers: Infinity,
+              tabSize: 2,
+            }}
+          />
+          <div>{this.state.example}</div>
+        </Styles.Flex>
 
-        {/*<Button title='run' handleClick={this.runCode} />*/}
-
-        {/*<TextArea placeholder='Пример кода' value={example} handleChange={this.handleChangeExample}/>*/}
-
-          {subThemes && subThemes.map((subTheme, i) =>
+        {subThemes && subThemes.map((subTheme, i) =>
           <div key={i}>
             <Input
               autoFocus placeholder='Название подтемы' value={subTheme.subName}
@@ -131,7 +132,9 @@ export default class Theme extends React.Component {
               placeholder='Пример кода' value={subTheme.subExample}
               handleChange={event => this.handleChangeSubExample(event, i)} />
           </div>)}
-        <Styles.SubTheme onClick={this.addSubTheme}><Styles.Plus /> Добавить подтему</Styles.SubTheme>
+        <Styles.SubTheme onClick={this.addSubTheme}>
+          {/*<Styles.Plus /> */}
+          Добавить подтему</Styles.SubTheme>
         <Button handleClick={this.save} title='Сохранить'/>
       </>
     )
@@ -145,7 +148,30 @@ export default class Theme extends React.Component {
       <>
         <Styles.Title>{name}</Styles.Title>
         <Styles.Description>{description}</Styles.Description>
-        <TextArea readonly value={example} />
+        {/*<TextArea readonly value={example} />*/}
+        <Styles.Flex justifyContent='flex-start'>
+          <AceEditor
+            mode="javascript"
+            theme="twilight"
+            onChange={this.onChange}
+            defaultValue={example}
+            placeholder='example code'
+            fontSize={16}
+            style={{marginTop: '20px'}}
+            width='800px'
+            height='450px'
+            name="EXAMPLE_CODE"
+            editorProps={{ $blockScrolling: Infinity }}
+            enableBasicAutocompletion={true}
+            enableLiveAutocompletion={true}
+            enableSnippets={true}
+            setOptions={{
+              showLineNumbers: Infinity,
+              tabSize: 2,
+            }}
+          />
+          <div>{example}</div>
+        </Styles.Flex>
         {subThemes && subThemes.map((subTheme, i) =>
           <div key={i}>
             <Styles.Title>{subTheme.subName}</Styles.Title>
@@ -164,9 +190,24 @@ export default class Theme extends React.Component {
   render() {
     return (
       <Styles.Wrapper>
-        <Styles.ClosePop onClick={this.props.togglePopup} />
-        {!this.state.isEditTheme && this.props.theme ? this.viewTheme() : this.addOrEditTheme()}
+        {!this.state.isEditTheme && !isEmpty(this.props.theme) ? this.viewTheme() : this.addOrEditTheme()}
       </Styles.Wrapper>
     )
   }
 }
+
+const mapStateToProps = store => ({
+  technologies: store.Content.technologies,
+  themes: store.Content.technologyPage.technology.themes,
+  theme: store.Content.technologyPage.activeTheme
+});
+
+const mapDispatchToProps = dispatch => ({
+  getThemes: (idTechnology) => dispatch(getThemes(idTechnology)),
+  togglePopup: (boolean, childName) => dispatch(togglePopup(boolean, childName)),
+  updateTheme: (id, theme) => dispatch(updateTheme(id, theme)),
+  openDataTheme: (theme) => dispatch(openDataTheme(theme)),
+  removeTheme: (id) => dispatch(removeTheme(id)),
+});
+
+export const Theme = connect(mapStateToProps, mapDispatchToProps)(ThemeComponent);
