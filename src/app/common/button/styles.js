@@ -1,27 +1,16 @@
 import styled from "styled-components";
+import { Palette } from '../../style';
 
 const Button = styled.div`
-  width: 110px;
-  height: 40px;
-  border-radius: 3px;
-  border: 1px solid silver;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
-  margin: 20px auto;
-  ${({edit}) => edit} & {
-    width: auto;
-    height: auto;
-    border-radius: 0px;
-    border: none;
-    margin: 0px;
-    margin-right: 30px;
-    margin-top: 30px;
-    :hover {
-      color: silver;
-    }
-  }`;
+  color: ${Palette.lightBlack};
+  margin: ${({margin}) => margin};
+  text-decoration: ${({textDecoration}) => textDecoration || 'none'};
+  text-align: ${({textAlign}) => textAlign};
+  :hover {
+    color: ${Palette.purple};
+  }
+`;
 
 export default {
   Button

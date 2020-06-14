@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
+import Scrollchor from 'react-scrollchor';
 
 import Input from '../../common/input/Input';
 import TextArea from '../../common/textArea/TextArea';
@@ -18,7 +19,7 @@ class TechnologyCatalogContainer extends React.Component {
   handleClick = () => {
     const { name, description, idTechnology } = this.state;
 
-    if (name && description && !idTechnology) {
+    if (name && !idTechnology) {
       this.props.addTechnology(name, description);
       this.setState({ name: '', description: '' });
     } else {
@@ -28,9 +29,6 @@ class TechnologyCatalogContainer extends React.Component {
 
     if (!name) this.setState({ requireName: true });
     else this.setState({ requireName: false });
-
-    if (!description) this.setState({ requireDescription: true });
-    else this.setState({ requireDescription: false });
   };
 
   handleChangeName = (event) => {
@@ -55,44 +53,50 @@ class TechnologyCatalogContainer extends React.Component {
   };
 
   blockForAddingTechnology = () =>
-    <Styles.ItemBlock>
+    <Styles.TechnoBlock>
       <Input
         require={this.state.requireName}
-        placeholder='Название технологии'
+        placeholder='Название технологии*'
         value={this.state.name}
         handleChange={this.handleChangeName}
       />
       <TextArea
-        require={this.state.requireDescription}
         placeholder='Описание технологии'
         value={this.state.description}
         handleChange={this.handleChangeDescription}
       />
-      <Button title='Сохранить' handleClick={this.handleClick} />
-    </Styles.ItemBlock>;
+      <Button textAlign='right' margin='30px 0px 0 0' title='Добавить' handleClick={this.handleClick} />
+    </Styles.TechnoBlock>;
 
   render() {
     const { technologies } = this.props;
 
     return (
-      <Styles.Wrapper>
-        <Styles.Caption>Каталог технологий</Styles.Caption>
+      <Styles.Wrapper style={{paddingBottom: '100px'}}>
+          <Styles.Left>
+            {technologies && technologies.map(technology =>
+              <Scrollchor animate={{offset: -280, duration: 500}} key={technology['_id']} to={`${technology['_id']}`}>
+                <Styles.TechnoLink>{technology.name}</Styles.TechnoLink>
+              </Scrollchor>
+            )}
+          </Styles.Left>
 
-        <Styles.CatalogBlock>
-          {this.blockForAddingTechnology()}
-
-          {technologies && technologies.map(technology =>
-            <Styles.ItemBlock key={technology['_id']}>
-              <Styles.Name>{technology.name}</Styles.Name>
-              <Styles.Description>{technology.description}</Styles.Description>
-              <Button title='Открыть' handleClick={() => this.open(technology['_id'])} />
-              <div style={{display: 'flex'}}>
-                <Button handleClick={() => this.edit(technology)} title='Редактировать' />
-                <Button handleClick={() => this.remove(technology['_id'])} title='Удалить' />
-              </div>
-            </Styles.ItemBlock>
-          )}
-        </Styles.CatalogBlock>
+          <Styles.Right>
+            {this.blockForAddingTechnology()}
+            {technologies && technologies.map(technology =>
+              <Styles.TechnoBlock id={technology['_id']} key={technology['_id']}>
+                <Styles.Name onClick={() => this.open(technology['_id'])}>{technology.name}</Styles.Name>
+                <Styles.Description>
+                  {technology.description}
+                </Styles.Description>
+                <Styles.Flex>
+                  <Button margin='0 20px 0 0' title='Редактировать' handleClick={() => this.edit(technology)} />
+                  <Button title='Удалить' handleClick={() => this.remove(technology['_id'])} />
+                  <Button margin='0 0 0 510px' title='Открыть' handleClick={() => this.open(technology['_id'])} />
+                </Styles.Flex>
+              </Styles.TechnoBlock>
+            )}
+          </Styles.Right>
       </Styles.Wrapper>
     );
   }

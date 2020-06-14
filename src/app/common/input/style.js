@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Palette } from "../../style";
 
 const InputBloc = styled.div`
   display: flex;
@@ -16,10 +17,11 @@ const Input = styled.input.attrs(() => ({
   min-height: 40px;
   margin-top: 20px;
   border: none;
-  border-bottom: ${({require}) => require ? '1px solid red' : '1px solid silver'};
+  border-bottom: 1px solid ${({require}) => require ? Palette.red : Palette.darkSilver};
   padding-left: 3px;
   font-size: 17px;
-  color: #636363;
+  color: ${Palette.darkSilver};
+  background: none;
   ::placeholder {
     color: silver;
     font-size: 15px;

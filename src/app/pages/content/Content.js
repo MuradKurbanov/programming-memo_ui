@@ -28,41 +28,44 @@ class ContentContainer extends React.Component {
 
     }
 
-    if (!this.state.caption || !this.state.description || prevProps.match.params.name !== match.params.name) {
+    if (!this.state.caption || prevProps.match.params.name !== match.params.name) {
       technologies.forEach(item => item['_id'] === match.params.name &&
          this.setState({ caption: item.name, description: item.description }))
     }
   }
 
   addTheme = () => {
-    this.props.togglePopup(true, 'ADD_THEME');
+    this.props.history.push('/theme');
+    // this.props.togglePopup(true, 'ADD_THEME');
   };
 
 
   openArticle = (theme) => {
-    this.props.togglePopup(true, 'OPEN_THEME');
+    this.props.history.push('/theme');
+    // this.props.togglePopup(true, 'OPEN_THEME');
     this.props.openDataTheme(theme);
   };
 
   render() {
     const { themes } = this.props;
+    const { caption, description } = this.state;
 
     return (
       <Styles.Wrapper>
-        <Styles.Caption>{this.state.caption}</Styles.Caption>
-        <Styles.Description>{this.state.description}</Styles.Description>
+        <Styles.Caption textAlign='left'>{caption}</Styles.Caption>
+        <Styles.Description>{description}</Styles.Description>
 
-        <Styles.Catalog>
-          <Styles.Article onClick={this.addTheme}>
-           <Styles.AddTheme />
-          </Styles.Article>
-          {!isEmpty(themes) && themes.map(theme => (
-            <Styles.Article key={theme['_id']} onClick={() => this.openArticle(theme)}>
-              <Styles.Title>{theme.name}</Styles.Title>
-              <Styles.GeneralText>{theme.description}</Styles.GeneralText>
-            </Styles.Article>
-          ))}
-        </Styles.Catalog>
+        <Styles.Theme onClick={this.addTheme}>
+          Добавит новую тему<span>+</span>
+
+        </Styles.Theme>
+        {!isEmpty(themes) && themes.map((theme, i, arr) => (
+          <div key={theme['_id']} onClick={() => this.openArticle(theme)}>
+            <Styles.Theme borderBottom={(i + 1) === arr.length}>
+              {theme.name.substring(0,30)} <span>{theme.description.substring(0,50)}...</span>
+            </Styles.Theme>
+          </div>
+        ))}
       </Styles.Wrapper>
     )
   }

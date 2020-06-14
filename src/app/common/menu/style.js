@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Wrapper, Flex } from '../../style';
+import { Wrapper, Flex, Palette } from '../../style';
 
 const Menu = styled.div`
   position: relative;
@@ -8,28 +8,28 @@ const Menu = styled.div`
   > a {
     height: 22px;
     min-width: 100px;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     transition: border-width 0.8s linear;
     &:hover {
-      border-bottom: solid 1px;
+      border-bottom: solid 1px ${Palette.purple};
       border-width: 10px;
     }
   }
 `;
 
 const SubMenu = styled.div`
+  min-width: 180px;
+  padding-right: 20px;
   display: flex;
   flex-direction: column;
   position: absolute;
   z-index: 2;
-  left: -99%;
+  left: ${({left}) => left}px;
   > a {
     height: 22px;
-    min-width: 100px;
-    margin-bottom: 20px;
-    &:hover {
-      text-decoration: underline;
-    }
+    min-width: 150px;
+    margin-bottom: 10px;
+    border-bottom: solid 1px ${Palette.purple};
   }
 `;
 
