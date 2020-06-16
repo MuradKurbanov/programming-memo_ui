@@ -29,6 +29,7 @@ const TechnoBlock = styled.div`
   box-shadow: 0px 0px 6px 0px #dcdcdc;
   overflow: hidden;
   padding: 15px;
+  position: relative;
 `;
 
 const Name = styled.div`
@@ -55,6 +56,17 @@ const Description = styled.div`
   }
 `;
 
+const Alert = styled.div`
+  width: 100%;
+  height: 100%;
+  background: ${Palette.lightSilver};
+  position: absolute;
+  padding-top: 50px;
+  text-align: center;
+  left: 0;
+  top: 0;
+`;
+
 export default {
   Wrapper,
   Caption,
@@ -64,5 +76,6 @@ export default {
   TechnoLink,
   TechnoBlock,
   Name,
-  Description
+  Description,
+  Alert
 }
