@@ -2,7 +2,8 @@ import  {
   GET_THEMES_SUCCESS, GET_TECHNOLOGIES_LIST,
   OPEN_THEME_DATA, DELETE_THEME_SUCCESS,
   UPDATE_THEME_SUCCESS, ADD_THEME_SUCCESS,
-  UPDATE_TECHNOLOGIES_SUCCESS, DELETE_TECHNOLOGY_SUCCESS
+  UPDATE_TECHNOLOGIES_SUCCESS, DELETE_TECHNOLOGY_SUCCESS,
+  ADD_TECHNOLOGIES_SUCCESS
 } from './actions';
 
 const initialValue = {
@@ -19,6 +20,11 @@ export const Content = (state = initialValue, action) => {
       return {
         ...state,
         technologies: action.technologies
+      };
+
+    case ADD_TECHNOLOGIES_SUCCESS:
+      return {
+        ...state,
       };
 
     case UPDATE_TECHNOLOGIES_SUCCESS:

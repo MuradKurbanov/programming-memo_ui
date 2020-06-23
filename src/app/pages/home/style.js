@@ -32,7 +32,7 @@ const Animation = styled(text)`
 `;
 
 const finalBlockExtension = keyframes`
-  from { max-width: 0px; }
+  from { max-width: 0; }
 `;
 
 const FinalAnimation = styled(text)`
@@ -53,10 +53,9 @@ const CursorRepeat = keyframes`
 const Cursor = styled.div`
   width: 12px;
   height: 50px;
-  margin: 10px 0px;
-  margin-left: 15px;
+  margin: 10px 0 10px 15px;
   background: ${Palette.white};
-  animation: ${CursorRepeat} 1.2s linear 5s infinite;
+  animation: ${CursorRepeat} 1.4s linear infinite;
 `;
 
 export default {

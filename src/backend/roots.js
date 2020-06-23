@@ -1,6 +1,5 @@
 import { Home } from '../app/pages/home/Home';
-import { Content } from "../app/pages/content/Content";
-import { Theme } from "../app/pages/content/Theme";
+import { Themes } from "../app/pages/themes/Themes";
 import { Practice } from '../app/pages/practice/Practice';
 import { Technologies } from '../app/pages/technologies/Technologies';
 
@@ -20,20 +19,8 @@ export const Roots = [
   },
   {
     title: 'Темы',
-    component: Content,
+    component: Themes,
     path: '/themes/:name',
-    menu: false,
-  },
-  {
-    title: 'Тема',
-    component: Theme,
-    path: '/theme/:name',
-    menu: false,
-  },
-  {
-    title: 'Создание темы',
-    component: Theme,
-    path: '/theme',
     menu: false,
   },
   {

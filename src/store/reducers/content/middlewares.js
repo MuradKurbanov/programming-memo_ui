@@ -4,9 +4,8 @@ import {
 } from '../../../backend/requests';
 import {
   getThemesSuccess, getTechnologiesAction, addThemeSuccess, updateThemeSuccess,
-  removeThemeSuccess, updateTechnologySuccess, deleteTechnologySuccess
+  removeThemeSuccess, updateTechnologySuccess, deleteTechnologySuccess, addTechnologies
 } from './actions';
-import { togglePopup } from '../common/actions';
 
 // Technologies
 export const getTechnologies = (id) => dispatch => {
@@ -17,6 +16,7 @@ export const getTechnologies = (id) => dispatch => {
 
 export const addTechnology = (name, description) => dispatch => {
   addTechnologyApi(name, description)
+    .then(dispatch(addTechnologies()))
     .then(dispatch(getTechnologies()))
 };
 
@@ -43,7 +43,6 @@ export const addTheme = (theme) => (dispatch, getStore) => {
   const idTechnology = getStore().Content.technologyPage.technology.idTechnology;
   addThemeApi(theme)
     .then(dispatch(addThemeSuccess()))
-    .then(dispatch(togglePopup()))
     .then(dispatch(getThemes(idTechnology)))
 };
 
@@ -51,7 +50,6 @@ export const removeTheme = (id) => (dispatch, getStore) => {
   const idTechnology = getStore().Content.technologyPage.technology.idTechnology;
   removeThemeApi(id)
     .then(dispatch(removeThemeSuccess()))
-    .then(dispatch(togglePopup()))
     .then(dispatch(getThemes(idTechnology)))
 };
 
@@ -59,6 +57,5 @@ export const updateTheme = (id, theme) => (dispatch, getStore) => {
   const idTechnology = getStore().Content.technologyPage.technology.idTechnology;
   editThemeApi(id, theme)
     .then(dispatch(updateThemeSuccess()))
-    .then(dispatch(togglePopup()))
     .then(dispatch(getThemes(idTechnology)))
 };

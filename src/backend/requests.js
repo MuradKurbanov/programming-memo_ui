@@ -9,27 +9,27 @@ const http = axios.create({
 
 // Theme
 // Create new theme with idTechnology
-export const addThemeApi = (theme) => http.post(`/themes`, theme);
+export const addThemeApi = (theme) => http.post(`/themes-service/`, theme);
 
 // Read themes by idTechnology
-export const getThemesApi = (idTechnology) => http.get(`/themes/${idTechnology}?timestamp=${Date.now()}`, { cache: false });
+export const getThemesApi = (idTechnology) => http.get(`/themes-service/${idTechnology}?timestamp=${Date.now()}`, { cache: false });
 
 // Update theme by id
-export const editThemeApi = (id, theme) => http.put(`/themes/${id}`, theme);
+export const editThemeApi = (id, theme) => http.put(`/themes-service/${id}`, theme);
 
 //  Delete theme by id
-export const removeThemeApi = (id) => http.delete(`/themes/${id}`);
+export const removeThemeApi = (id) => http.delete(`/themes-service/${id}`);
 
 
 // Technology
 // Create
-export const addTechnologyApi = (name, description) => http.post(`/technologies`, { name, description });
+export const addTechnologyApi = (name, description) => http.post(`/technologies-service/`, { name, description });
 
 // Read
-export const getTechnologiesApi = (id) => http.get(`/technologies/${id}?timestamp=${Date.now()}`,{ cache: false });
+export const getTechnologiesApi = (id) => http.get(`/technologies-service/${id}?timestamp=${Date.now()}`, { cache: false });
 
 // Update
-export const editTechnologyApi = (id, technology) => http.put(`/technologies/${id}`, technology);
+export const editTechnologyApi = (id, technology) => http.put(`/technologies-service/${id}`, technology);
 
 // Delete
-export const deleteTechnologyApi = (id) => http.delete(`/technologies/${id}`);
+export const deleteTechnologyApi = (id) => http.delete(`/technologies-service/${id}`);

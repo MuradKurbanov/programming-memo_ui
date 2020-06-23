@@ -9,23 +9,40 @@ class HomeComponent extends React.Component {
   state = {
     contentAnimation: '',
     isFinalAnimation: false,
+    counter: 0,
+    textForAnimation: [
+      'create technology cards', 'add some themes in technology cards',
+      'write and verify code online', 'improve your skill', true
+    ]
   };
+
+  timeout;
 
   componentDidMount() {
     this.props.wrapperBackground(true);
-    // setTimeout(() => this.setState({ contentAnimation: 'create technology cards'}), 1000);
-    // setTimeout(() => this.setState({ contentAnimation: '' }), 5000);
-    // setTimeout(() => this.setState({ contentAnimation: 'add some themes in technology cards'}), 6000);
-    // setTimeout(() => this.setState({ contentAnimation: '' }), 10000);
-    // setTimeout(() => this.setState({ contentAnimation: 'write and verify code online'}), 11000);
-    // setTimeout(() => this.setState({ contentAnimation: ''}), 15000);
-    // setTimeout(() => this.setState({ contentAnimation: 'improve your skill'}), 16000);
-    // setTimeout(() => this.setState({ contentAnimation: ''}), 20000);
-    // setTimeout(() => this.setState({ isFinalAnimation: true}), 21000);
+    this.timeout = setTimeout(() => this.currentForAnimation(), 1500);
   }
 
   componentWillUnmount() {
     this.props.wrapperBackground(false);
+    clearTimeout(this.timeout);
+  }
+
+  currentForAnimation = () => {
+    const { textForAnimation, counter } = this.state;
+
+    if (counter < textForAnimation.length - 1) {
+      this.setState({
+        contentAnimation: textForAnimation[counter],
+        counter: counter + 1
+      });
+      this.timeout = setTimeout(() => {
+        this.setState({ contentAnimation: '' });
+        this.timeout = setTimeout(() => this.currentForAnimation(), 1000);
+      }, 5000);
+    }
+
+    else this.setState({ isFinalAnimation: true });
   }
 
   render() {

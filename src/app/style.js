@@ -58,10 +58,10 @@ export const Wrapper = styled.div`
 `;
 
 export const Caption = styled.div`
-  font-size: 25px;
+  font-size: 27px;
+  line-height: 20px;
   text-align: ${({textAlign}) => textAlign || 'center' };
   color: ${Palette.lightBlack};
-  margin-bottom: 50px;
 `;
 
 export const Flex = styled.div`
@@ -69,5 +69,6 @@ export const Flex = styled.div`
   display: flex;
   justify-content: ${({justifyContent}) => justifyContent || 'center'};
   align-items: ${({alignItems}) => alignItems || 'center'};
+  flex-direction: ${({flexDirection}) => flexDirection || 'row'}
   flex-wrap: wrap;
 `;
