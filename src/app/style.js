@@ -8,6 +8,7 @@ export const Palette = {
   white: '#f1f1f1',
   purple: '#9474A5',
   red: '#b11717',
+  green: '#5fb117'
 };
 
 export const GlobalStyle = createGlobalStyle`

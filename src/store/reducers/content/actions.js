@@ -18,9 +18,9 @@ export const addThemeSuccess = () => ({
   type: 'ADD_THEME_SUCCESS'
 });
 
-export const getThemesSuccess = (technology) => ({
+export const getThemesSuccess = (activeTechnology) => ({
   type: 'GET_THEMES_SUCCESS',
-  technology
+  activeTechnology
 });
 
 export const removeThemeSuccess = () => ({

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Palette } from "../../style";
 
-const InputBloc = styled.div`
+const InputBlock = styled.div`
   display: flex;
 `;
 
@@ -14,7 +14,7 @@ const Input = styled.input.attrs(() => ({
   type: 'text',
 }))`
   width: 100%;
-  min-height: 40px;
+  min-height: 30px;
   margin-top: 20px;
   border: none;
   border-bottom: 1px solid ${({require}) => require ? Palette.red : Palette.darkSilver};
@@ -29,7 +29,7 @@ const Input = styled.input.attrs(() => ({
 `;
 
 export default {
-  InputBloc,
+  InputBlock,
   Title,
   Input
 }

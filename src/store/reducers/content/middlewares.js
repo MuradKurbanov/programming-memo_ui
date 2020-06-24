@@ -40,21 +40,21 @@ export const getThemes = (idTechnology) => dispatch => {
 };
 
 export const addTheme = (theme) => (dispatch, getStore) => {
-  const idTechnology = getStore().Content.technologyPage.technology.idTechnology;
+  const idTechnology = getStore().Content.technologyPage.activeTechnology.idTechnology;
   addThemeApi(theme)
     .then(dispatch(addThemeSuccess()))
     .then(dispatch(getThemes(idTechnology)))
 };
 
 export const removeTheme = (id) => (dispatch, getStore) => {
-  const idTechnology = getStore().Content.technologyPage.technology.idTechnology;
+  const idTechnology = getStore().Content.technologyPage.activeTechnology.idTechnology;
   removeThemeApi(id)
     .then(dispatch(removeThemeSuccess()))
     .then(dispatch(getThemes(idTechnology)))
 };
 
 export const updateTheme = (id, theme) => (dispatch, getStore) => {
-  const idTechnology = getStore().Content.technologyPage.technology.idTechnology;
+  const idTechnology = getStore().Content.technologyPage.activeTechnology.idTechnology;
   editThemeApi(id, theme)
     .then(dispatch(updateThemeSuccess()))
     .then(dispatch(getThemes(idTechnology)))

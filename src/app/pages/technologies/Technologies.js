@@ -119,10 +119,12 @@ class TechnologiesContainer extends React.Component {
                 <>
                   <Styles.Name onClick={() => this.openTechnology(technology['_id'])}>{technology.name}</Styles.Name>
                   <Styles.Description>{technology.description.substring(0,230)}...</Styles.Description>
-                  <Styles.Flex>
-                    <Button margin='0 20px 0 0' title='Редактировать' handleClick={() => this.editTechnology(technology)} />
-                    <Button title='Удалить' handleClick={() => this.setState({ alertByTechnologyId: technology['_id'] })} />
-                    <Button margin='0 0 0 510px' title='Открыть' handleClick={() => this.openTechnology(technology['_id'])} />
+                  <Styles.Flex justifyContent='space-between'>
+                    <Styles.Flex justifyContent='flex-start'>
+                      <Button margin='0 20px 0 0' title='Редактировать' handleClick={() => this.editTechnology(technology)} />
+                      <Button title='Удалить' handleClick={() => this.setState({ alertByTechnologyId: technology['_id'] })} />
+                    </Styles.Flex>
+                    <Button title='Открыть' handleClick={() => this.openTechnology(technology['_id'])} />
                   </Styles.Flex>
                   {alertByTechnologyId === technology['_id'] && this.alert(technology['_id'])}
                 </>

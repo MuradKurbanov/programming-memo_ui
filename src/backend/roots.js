@@ -1,5 +1,5 @@
 import { Home } from '../app/pages/home/Home';
-import { Themes } from "../app/pages/themes/Themes";
+import { Topics } from "../app/pages/topics/Topics";
 import { Practice } from '../app/pages/practice/Practice';
 import { Technologies } from '../app/pages/technologies/Technologies';
 
@@ -19,8 +19,8 @@ export const Roots = [
   },
   {
     title: 'Темы',
-    component: Themes,
-    path: '/themes/:name',
+    component: Topics,
+    path: '/topics/:name',
     menu: false,
   },
   {
