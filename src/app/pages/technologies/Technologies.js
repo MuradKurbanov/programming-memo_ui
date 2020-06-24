@@ -26,7 +26,7 @@ class TechnologiesContainer extends React.Component {
   };
 
   openTechnology = path => {
-    this.props.history.push(`/themes/${path}`);
+    this.props.history.push(`/topics/${path}`);
   };
 
   editTechnology = technology => {
