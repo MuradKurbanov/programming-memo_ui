@@ -2,13 +2,13 @@ import React from "react";
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
-import { getThemes } from '../../../store/reducers/content/middlewares';
+import { getThemes, updateTheme, removeTheme, addTheme } from '../../../store/reducers/content/middlewares';
 import { openDataTheme } from '../../../store/reducers/content/actions';
-import { Theme } from './Theme';
+import { Topic } from './Topic';
 
 import Styles from "./style";
 
-class ThemesContainer extends React.Component {
+class TopicsContainer extends React.Component {
   state = {
     caption: '',
     description: '',
@@ -35,7 +35,7 @@ class ThemesContainer extends React.Component {
   }
 
 
-  openTheme = (theme) => {
+  handleViewTheme = (theme) => {
     if (!theme) {
       if (this.state.themeId) this.setState({ isOpenTheme: true, themeId: '' });
       else this.setState({ isOpenTheme: !this.state.isOpenTheme });
@@ -55,7 +55,7 @@ class ThemesContainer extends React.Component {
   };
 
   render() {
-    const { themes } = this.props;
+    const { themes, updateTheme, removeTheme, addTheme, idTechnology } = this.props;
     const { caption, description, isOpenTheme, themeId } = this.state;
 
     return (
@@ -70,22 +70,41 @@ class ThemesContainer extends React.Component {
         </Styles.Flex>
 
         {isOpenTheme && !themeId ?
-          <Theme /> :
-          <Styles.Item onClick={() => this.openTheme('')}>
-            Добавить новую тему<span>+</span>
-          </Styles.Item>
+          <Styles.WrapperTopic>
+            <Styles.iconClose onClick={() => this.handleViewTheme('')} />
+            <Topic
+              addTheme={addTheme}
+              idTechnology={idTechnology}
+              handleViewTheme={() => this.handleViewTheme('')}
+            />
+          </Styles.WrapperTopic>:
+          !isOpenTheme ?
+            <Styles.Item onClick={() => this.handleViewTheme('')}>
+              Добавить новую тему <Styles.iconAdd />
+            </Styles.Item> : null
         }
 
         {!isEmpty(themes) && themes.map((theme, i, arr) => (
           <div key={theme['_id']}>
             {isOpenTheme && theme['_id'] === themeId ?
-              <Theme theme={theme} /> :
-              <Styles.Item borderBottom={(i + 1) === arr.length}>
-                {theme.name.substring(0,30)}
-                <span onClick={() => this.openTheme(theme)}>
-                  {theme.description.substring(0,70)}...
-                </span>
-              </Styles.Item>
+              <Styles.WrapperTopic>
+                <Styles.iconClose onClick={() => this.handleViewTheme(theme)} />
+                <Topic
+                  theme={theme}
+                  updateTheme={updateTheme}
+                  removeTheme={removeTheme}
+                  idTechnology={idTechnology}
+                  handleViewTheme={() => this.handleViewTheme(theme)}
+                />
+              </Styles.WrapperTopic>:
+              !isOpenTheme ?
+              <Styles.Item
+                onClick={() => this.handleViewTheme(theme)}
+                borderBottom={(i + 1) === arr.length}
+              >
+                {theme.name.substring(0, 30)}
+                <span>{theme.description.substring(0, 80)}...</span>
+              </Styles.Item> : null
             }
           </div>
         ))}
@@ -96,13 +115,17 @@ class ThemesContainer extends React.Component {
 
 const mapStateToProps = store => ({
   technologies: store.Content.technologies,
-  themes: store.Content.technologyPage.technology.themes,
+  themes: store.Content.technologyPage.activeTechnology.themes,
   theme: store.Content.technologyPage.activeTheme,
+  idTechnology: store.Content.technologyPage.activeTechnology.idTechnology
 });
 
 const mapDispatchToProps = dispatch => ({
   getThemes: (idTechnology) => dispatch(getThemes(idTechnology)),
   openDataTheme: (theme) => dispatch(openDataTheme(theme)),
+  updateTheme: (id, theme) => dispatch(updateTheme(id, theme)),
+  removeTheme: (id) => dispatch(removeTheme(id)),
+  addTheme: (theme) => dispatch(addTheme(theme))
 });
 
-export const Themes = connect(mapStateToProps, mapDispatchToProps)(ThemesContainer);
+export const Topics = connect(mapStateToProps, mapDispatchToProps)(TopicsContainer);

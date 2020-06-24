@@ -17,7 +17,7 @@ class MenuComponent extends React.Component {
   subMenu = (links) => (
     <Styles.SubMenu left={-180} onMouseEnter={this.viewSubmenu} onMouseLeave={this.hideSubmenu}>
       {links && links.map(link => (
-        <Link key={link['_id']} to={`/themes/${link['_id']}`}>{link.name}</Link>
+        <Link key={link['_id']} to={`/topics/${link['_id']}`}>{link.name}</Link>
       ))}
     </Styles.SubMenu>
   );
@@ -68,7 +68,7 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = (store) => ({
   isWrapperBlack: store.Common.isWrapperBlack,
   technologies: store.Content.technologies,
-  themes: store.Content.technologyPage.technology.themes,
+  themes: store.Content.technologyPage.activeTechnology.themes,
 });
 
 export const Menu = connect(mapStateToProps, mapDispatchToProps)(MenuComponent);

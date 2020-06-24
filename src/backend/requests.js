@@ -7,15 +7,15 @@ const http = axios.create({
   adapter: retryAdapterEnhancer(axios.defaults.adapter)
 });
 
-// Theme
+// Topic
 // Create new theme with idTechnology
-export const addThemeApi = (theme) => http.post(`/themes-service/`, theme);
+export const addThemeApi = (topic) => http.post(`/themes-service/`, topic);
 
-// Read themes by idTechnology
+// Read topics by idTechnology
 export const getThemesApi = (idTechnology) => http.get(`/themes-service/${idTechnology}?timestamp=${Date.now()}`, { cache: false });
 
 // Update theme by id
-export const editThemeApi = (id, theme) => http.put(`/themes-service/${id}`, theme);
+export const editThemeApi = (id, topic) => http.put(`/themes-service/${id}`, topic);
 
 //  Delete theme by id
 export const removeThemeApi = (id) => http.delete(`/themes-service/${id}`);

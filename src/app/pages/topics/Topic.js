@@ -1,26 +1,21 @@
 import React from "react";
 import { isEmpty } from 'lodash';
 
-// ACE CODE_EDITOR
-import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/theme-monokai";
-import "ace-builds/src-noconflict/ext-language_tools";
-import "ace-builds/src-noconflict/snippets/javascript";
-
+import CodeEditor from '../../common/codeEditor/CodeEditor';
 import TextArea from "../../common/textArea/TextArea";
 import Button from "../../common/button/Button";
 import Input from "../../common/input/Input";
 
 import Styles from "./style";
 
-export class Theme extends React.Component {
+export class Topic extends React.Component {
   state = {
     name: '',
     description: '',
-    example: 'console.log("hi")',
+    example: '',
     subThemes: [],
     isEditTheme: false,
+    isCreateRef: false,
   };
 
   componentDidMount() {
@@ -52,16 +47,17 @@ export class Theme extends React.Component {
     })
   };
 
-  // handleChangeSubExample = (event, id) => {
-  //   this.setState({
-  //     subThemes: this.state.subThemes.map((subTheme, i) => i === id ?
-  //       { ...subTheme, subExample: event.target.value } : subTheme)
-  //   })
-  // };
+  changeCodeEditor = (...args) => {
+    if (args[2]) this.setState({
+      subThemes: this.state.subThemes.map((subTheme, i) => i === args[1] ?
+        { ...subTheme, subExample: args[0] } : subTheme)})
+
+    else this.setState({ example: args[0] });
+  }
 
   save = () => {
     const { name, description, example, subThemes } = this.state;
-    const { idTechnology, theme } = this.props;
+    const { idTechnology, theme, addTheme, updateTheme, handleViewTheme } = this.props;
 
     const dataForSend = {
       name, description, example,
@@ -69,45 +65,21 @@ export class Theme extends React.Component {
       subThemes: subThemes.filter(subTheme => subTheme.subName || subTheme.subDescription || subTheme.subExample !== '')
     };
 
-    if (theme) this.props.updateTheme(theme['_id'], dataForSend);
-    else this.props.addTheme(dataForSend);
+    if (theme) updateTheme(theme['_id'], dataForSend);
+    else addTheme(dataForSend);
+
+    handleViewTheme();
   };
 
   addSubTheme = () => {
     this.setState({ subThemes: [...this.state.subThemes, { subName: '', subDescription: '', subExample: '' }] });
   };
 
-  codeEditor = () => (
-    <>
-      <AceEditor
-        mode='javascript'
-        theme="monokai"
-        onChange={this.onChange}
-        defaultValue={this.state.example}
-        placeholder='example code'
-        fontSize={14}
-        style={{marginTop: '20px'}}
-        width='100%'
-        height='250px'
-        name="EXAMPLE_CODE"
-        editorProps={{ $blockScrolling: Infinity }}
-        enableBasicAutocompletion={true}
-        enableLiveAutocompletion={true}
-        enableSnippets={true}
-        setOptions={{
-          showLineNumbers: Infinity,
-          tabSize: 2,
-        }}
-      />
-      <Styles.Example>{this.state.example}</Styles.Example>
-    </>
-  )
-
   addOrEditTheme = () => (
-    <Styles.Theme>
+    <Styles.Topic>
       <Input autoFocus placeholder='Название темы' value={this.state.name} handleChange={this.handleChangeName}/>
       <TextArea placeholder='Описание темы' value={this.state.description} handleChange={this.handleChangeDescription}/>
-      {this.codeEditor()}
+      <CodeEditor onChange={this.changeCodeEditor} example={this.state.example} />
 
       {this.state.subThemes && this.state.subThemes.map((subTheme, i) =>
         <div key={i}>
@@ -117,7 +89,7 @@ export class Theme extends React.Component {
           <TextArea
             placeholder='Описание подтемы' value={subTheme.subDescription}
             handleChange={event => this.handleChangeSubDescription(event, i)} />
-          {this.codeEditor()}
+          <CodeEditor onChange={newValue => this.changeCodeEditor(newValue, i, true)} example={subTheme.subExample} />
         </div>
       )}
       <Styles.Flex justifyContent='space-between'>
@@ -126,34 +98,38 @@ export class Theme extends React.Component {
         </Styles.SubTheme>
         <Button handleClick={this.save} title='Сохранить'/>
       </Styles.Flex>
-    </Styles.Theme>
+    </Styles.Topic>
   );
 
   viewTheme = () => {
     const { name, description, subThemes } = this.state;
+    const { theme, removeTheme, handleViewTheme } = this.props;
     const updateTheme = () => this.setState({ isEditTheme: true });
-    const removeTheme = () => this.props.removeTheme(this.props.theme['_id']);
+    const handleRemoveTheme = () => {
+      removeTheme(theme['_id']);
+      handleViewTheme();
+    }
     return (
-      <Styles.Theme>
+      <Styles.Topic>
         <Styles.Title>{name}</Styles.Title>
         {description}
-        {this.codeEditor()}
+        <CodeEditor onChange={this.changeCodeEditor} example={this.state.example} />
         {subThemes && subThemes.map((subTheme, i) =>
           <div key={i}>
             <Styles.Title>{subTheme.subName}</Styles.Title>
-            <Styles.Description>{subTheme.subDescription}</Styles.Description>
-            {this.codeEditor()}
+            {subTheme.subDescription}
+            <CodeEditor onChange={newValue => this.changeCodeEditor(newValue, i, true)} example={subTheme.subExample} />
           </div>
         )}
         <Styles.Flex justifyContent='space-between'>
           <Button handleClick={updateTheme} edit title='Редактировать' />
-          <Button handleClick={removeTheme} remove title='Удалить' />
+          <Button handleClick={handleRemoveTheme} remove title='Удалить' />
         </Styles.Flex>
-      </Styles.Theme>
+      </Styles.Topic>
     )
   };
 
   render() {
-    return isEmpty(this.props.theme) ? this.addOrEditTheme() : this.viewTheme()
+    return isEmpty(this.props.theme) || this.state.isEditTheme ? this.addOrEditTheme() : this.viewTheme()
   }
 }

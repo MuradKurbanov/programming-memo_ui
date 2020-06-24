@@ -26,7 +26,7 @@ const TechnoBlock = styled.div`
   max-width: 800px;
   height: 200px;
   margin-bottom: 60px;
-  box-shadow: 0px 0px 6px 0px #dcdcdc;
+  box-shadow: 0 0 6px 0 #dcdcdc;
   overflow: hidden;
   padding: 15px;
   position: relative;
@@ -43,6 +43,7 @@ const Name = styled.div`
 `;
 
 const Description = styled.div`
+  height: 55px;
   color: ${Palette.darkSilver};
   font-size: 15px;
   margin-bottom: 20px;

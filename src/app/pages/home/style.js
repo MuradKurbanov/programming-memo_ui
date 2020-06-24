@@ -2,10 +2,11 @@ import styled, { keyframes } from 'styled-components';
 import { Wrapper, Flex, Palette } from '../../style';
 
 const text = styled.div`
-  font-size: 48px;
+  font-size: 46px;
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -.035em;
+  word-spacing: 4px;
 `;
 
 const StaticTitle = styled(text)`
@@ -16,16 +17,16 @@ const blockExtension = keyframes`
   40% { max-width: 900px; } 
   65% { max-width: 900px; } 
   75% { max-width: 900px; } 
-  100% { max-width: 0px; }
+  100% { max-width: 0; }
 `;
 
 const Animation = styled(text)`
-  max-width: 0px;
+  max-width: 0;
   width: auto;
   white-space: nowrap;
   overflow: hidden;
   color: ${Palette.white};
-  animation: ${blockExtension} 4s steps(50, end);
+  animation: ${blockExtension} 4.5s steps(50, end);
   > span {
      color: ${Palette.purple};
   }
@@ -52,10 +53,10 @@ const CursorRepeat = keyframes`
 
 const Cursor = styled.div`
   width: 12px;
-  height: 50px;
+  height: 47px;
   margin: 10px 0 10px 15px;
   background: ${Palette.white};
-  animation: ${CursorRepeat} 1.4s linear infinite;
+  animation: ${({isRunAnimation}) => isRunAnimation && CursorRepeat} 1s linear infinite;
 `;
 
 export default {

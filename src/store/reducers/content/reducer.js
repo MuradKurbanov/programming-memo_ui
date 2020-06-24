@@ -9,7 +9,7 @@ import  {
 const initialValue = {
   technologyPage: {
     activeTheme: {},
-    technology: {}
+    activeTechnology: {}
   },
   technologies: [],
 };
@@ -69,7 +69,7 @@ export const Content = (state = initialValue, action) => {
         ...state,
         technologyPage: {
           ...state.technologyPage,
-          technology: action.technology
+          activeTechnology: action.activeTechnology
         }
       };
 

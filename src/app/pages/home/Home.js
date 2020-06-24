@@ -9,10 +9,11 @@ class HomeComponent extends React.Component {
   state = {
     contentAnimation: '',
     isFinalAnimation: false,
+    isRunAnimation: true,
     counter: 0,
     textForAnimation: [
-      'create technology cards', 'add some themes in technology cards',
-      'write and verify code online', 'improve your skill', true
+      'create technology for learn', 'add topics to technology',
+      'write and verify code in topics online', 'improve your skill', true
     ]
   };
 
@@ -20,7 +21,7 @@ class HomeComponent extends React.Component {
 
   componentDidMount() {
     this.props.wrapperBackground(true);
-    this.timeout = setTimeout(() => this.currentForAnimation(), 1500);
+    this.timeout = setTimeout(() => this.currentForAnimation(), 2000);
   }
 
   componentWillUnmount() {
@@ -34,15 +35,22 @@ class HomeComponent extends React.Component {
     if (counter < textForAnimation.length - 1) {
       this.setState({
         contentAnimation: textForAnimation[counter],
-        counter: counter + 1
+        counter: counter + 1,
+        isRunAnimation: false
       });
       this.timeout = setTimeout(() => {
-        this.setState({ contentAnimation: '' });
-        this.timeout = setTimeout(() => this.currentForAnimation(), 1000);
+        this.setState({
+          contentAnimation: '',
+          isRunAnimation: true
+        });
+        this.timeout = setTimeout(() => this.currentForAnimation(), 2000);
       }, 5000);
     }
 
-    else this.setState({ isFinalAnimation: true });
+    else {
+      this.setState({ isFinalAnimation: true, isRunAnimation: false });
+      this.timeout = setTimeout(() => this.setState({ isRunAnimation: true }), 2500);
+    }
   }
 
   render() {
@@ -59,7 +67,7 @@ class HomeComponent extends React.Component {
               &nbsp;good luck and console.log("Hello World") <span aria-label='emoji' role="img">🙃</span>
             </Style.FinalAnimation>
           }
-          <Style.Cursor />
+          <Style.Cursor isRunAnimation={this.state.isRunAnimation} />
         </Style.Flex>
       </Style.Wrapper>
     )
