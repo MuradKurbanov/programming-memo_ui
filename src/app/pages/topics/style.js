@@ -1,9 +1,24 @@
 import styled from 'styled-components';
-import { Wrapper, Caption, Flex, Palette } from '../../style';
+import { Caption, Flex, Palette } from '../../style';
 import { IoIosAdd, IoIosClose } from 'react-icons/io';
 
+const TechnologyName = styled(Caption)`
+  text-align: left;
+  margin-bottom: 30px;
+`;
+
+const TechnologyDescription = styled.div`
+  max-width: 900px;
+  margin-bottom: 30px;
+`;
+
+const WrapperTopic = styled.div`
+  position: relative;
+  max-width: 900px;
+`;
+
 const Item = styled(Flex)`
-  width: 900px;
+  max-width: 900px;
   min-height: 60px;
   border-top: 1px solid;
   padding: 0 50px 0;
@@ -14,15 +29,19 @@ const Item = styled(Flex)`
   font-size: 17px;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   > span { font-size: 15px }
   :hover { 
     color: ${Palette.darkBlack};
     box-shadow: 0 0 5px 0 rgba(0,0,0,0.20);
   }
+  @media (max-width: 1024px) {
+    padding: 0 10px;
+  }
 `;
 
 const Topic = styled.div`
-  width: 900px;
+  max-width: 900px;
   min-height: 200px;
   color: ${Palette.darkSilver};
   border-top: 1px solid;
@@ -50,11 +69,6 @@ const SubTheme = styled.div`
   :hover { color: ${Palette.darkBlack} }
 `;
 
-const WrapperTopic = styled.div`
-  position: relative;
-  width: 900px;
-`;
-
 const iconClose = styled(IoIosClose)`
   position: absolute;
   right: 50px; 
@@ -69,15 +83,15 @@ const iconAdd = styled(IoIosAdd)`
 `;
 
 export default {
-  Wrapper,
-  Caption,
   Flex,
+  TechnologyName,
+  TechnologyDescription,
+  WrapperTopic,
   Item,
   Topic,
   Title,
   Example,
   SubTheme,
-  WrapperTopic,
   iconClose,
   iconAdd
 }

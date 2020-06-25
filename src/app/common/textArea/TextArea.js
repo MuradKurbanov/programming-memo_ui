@@ -9,6 +9,7 @@ const TextArea = ({require, placeholder, value, readonly, handleChange}) => (
     value={value}
     onChange={handleChange}
     readOnly={readonly}
+    maxLength='1000'
   />
 );
 export default TextArea;

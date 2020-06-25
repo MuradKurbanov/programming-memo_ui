@@ -18,8 +18,8 @@ export class Topic extends React.Component {
   };
 
   componentDidMount() {
-    if (!isEmpty(this.props.theme)) {
-      const { name, description, example, subThemes } = this.props.theme;
+    if (!isEmpty(this.props.topic)) {
+      const { name, description, example, subThemes } = this.props.topic;
       this.setState({ name, description, example, subThemes });
     }
   }
@@ -56,7 +56,7 @@ export class Topic extends React.Component {
 
   save = () => {
     const { name, description, example, subThemes } = this.state;
-    const { idTechnology, theme, addTheme, updateTheme, handleViewTheme } = this.props;
+    const { idTechnology, topic, addTheme, updateTheme, handleViewTheme } = this.props;
 
     const dataForSend = {
       name, description, example,
@@ -64,7 +64,7 @@ export class Topic extends React.Component {
       subThemes: subThemes.filter(subTheme => subTheme.subName || subTheme.subDescription || subTheme.subExample !== '')
     };
 
-    if (theme) updateTheme(theme['_id'], dataForSend);
+    if (topic) updateTheme(topic['_id'], dataForSend);
     else addTheme(dataForSend);
 
     handleViewTheme();
@@ -102,10 +102,10 @@ export class Topic extends React.Component {
 
   viewTheme = () => {
     const { name, description, subThemes } = this.state;
-    const { theme, removeTheme, handleViewTheme } = this.props;
+    const { topic, removeTheme, handleViewTheme } = this.props;
     const updateTheme = () => this.setState({ isEditTheme: true });
     const handleRemoveTheme = () => {
-      removeTheme(theme['_id']);
+      removeTheme(topic['_id']);
       handleViewTheme();
     }
     return (
@@ -129,6 +129,6 @@ export class Topic extends React.Component {
   };
 
   render() {
-    return isEmpty(this.props.theme) || this.state.isEditTheme ? this.addOrEditTheme() : this.viewTheme()
+    return isEmpty(this.props.topic) || this.state.isEditTheme ? this.addOrEditTheme() : this.viewTheme()
   }
 }

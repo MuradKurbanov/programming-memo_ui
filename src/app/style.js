@@ -1,10 +1,10 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
 export const Palette = {
-  darkBlack: '#181818',
+  darkBlack: '#292929',
   lightBlack: '#505050',
   darkSilver: '#6d6d6d',
-  lightSilver: '#edf0ef',
+  lightSilver: '#efefef',
   white: '#f1f1f1',
   purple: '#9474A5',
   red: '#b11717',
@@ -35,18 +35,10 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const Container = styled.div`
-  max-width: 2400px;
-  min-width: 320px;
   width: 100%;
-  height: auto;
+  min-height: 100vh;
   position: relative;
-  margin: 0 auto;
-`;
-
-export const Wrapper = styled.div`
-  min-height: ${({menu}) => menu ? '20vh' : '80vh'};
   background: ${({black}) => black ? Palette.darkBlack : Palette.lightSilver};
-  padding: 40px 50px;
   a {
     cursor: pointer;
     color: ${({black}) => black ? Palette.darkSilver : Palette.lightBlack};
@@ -55,6 +47,20 @@ export const Wrapper = styled.div`
     &:hover {
       color: ${({black}) => black ? Palette.lightSilver : Palette.darkBlack};
     }
+  }
+  @media (max-width: 1024px) {
+    font-size: 14px;
+  }
+`;
+
+export const Wrapper = styled.div`
+  max-width: 2100px;
+  min-width: 320px;
+  min-height: 100vh;
+  padding: 40px 50px;
+  margin: 0 auto;
+  @media (max-width: 1024px) {
+    padding: 20px;
   }
 `;
 

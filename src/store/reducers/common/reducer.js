@@ -5,7 +5,7 @@ const initialValue = {
     isOpenPopUp: false,
     childName: '',
   },
-  isWrapperBlack: false
+  isContainerBlack: false
 };
 
 export const Common = (state = initialValue, action) => {
@@ -23,7 +23,7 @@ export const Common = (state = initialValue, action) => {
     case WRAPPER_BACKGROUND:
       return {
         ...state,
-        isWrapperBlack: action.boolean
+        isContainerBlack: action.boolean
       };
 
     default:

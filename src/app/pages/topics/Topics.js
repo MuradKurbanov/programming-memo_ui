@@ -37,39 +37,34 @@ class TopicsContainer extends React.Component {
 
   handleViewTheme = (theme) => {
     if (!theme) {
-      if (this.state.themeId) this.setState({ isOpenTheme: true, themeId: '' });
+      if (this.state.topicId) this.setState({ isOpenTheme: true, topicId: '' });
       else this.setState({ isOpenTheme: !this.state.isOpenTheme });
       return;
     }
 
-    if (!this.state.themeId) {
-      this.setState({ isOpenTheme: true, themeId: theme['_id'] });
+    if (!this.state.topicId) {
+      this.setState({ isOpenTheme: true, topicId: theme['_id'] });
       this.props.openDataTheme(theme);
     }
-    else if (theme['_id'] === this.state.themeId) {
-      this.setState({ isOpenTheme: false, themeId: '' });
+    else if (theme['_id'] === this.state.topicId) {
+      this.setState({ isOpenTheme: false, topicId: '' });
     }
     else {
-      this.setState({ isOpenTheme: true, themeId: theme['_id'] });
+      this.setState({ isOpenTheme: true, topicId: theme['_id'] });
     }
   };
 
   render() {
-    const { themes, updateTheme, removeTheme, addTheme, idTechnology } = this.props;
-    const { caption, description, isOpenTheme, themeId } = this.state;
+    const { topics, updateTheme, removeTheme, addTheme, idTechnology } = this.props;
+    const { caption, description, isOpenTheme, topicId } = this.state;
 
     return (
-      <Styles.Wrapper>
-        <Styles.Flex
-          style={{margin: '0 0 100px 0'}}
-          justifyContent='flex-start'
-          alignItems='flex-end'
-        >
-          <Styles.Caption textAlign='left'>{caption}</Styles.Caption>
-          <div style={{marginLeft: '40px'}}>{description}</div>
-        </Styles.Flex>
+      <>
 
-        {isOpenTheme && !themeId ?
+        <Styles.TechnologyName>{caption}</Styles.TechnologyName>
+        <Styles.TechnologyDescription>{description}</Styles.TechnologyDescription>
+
+        {isOpenTheme && !topicId ?
           <Styles.WrapperTopic>
             <Styles.iconClose onClick={() => this.handleViewTheme('')} />
             <Topic
@@ -79,53 +74,56 @@ class TopicsContainer extends React.Component {
             />
           </Styles.WrapperTopic>:
           !isOpenTheme ?
-            <Styles.Item onClick={() => this.handleViewTheme('')}>
+            <Styles.Item borderBottom={isEmpty(topics)} onClick={() => this.handleViewTheme('')}>
               Добавить новую тему <Styles.iconAdd />
             </Styles.Item> : null
         }
 
-        {!isEmpty(themes) && themes.map((theme, i, arr) => (
-          <div key={theme['_id']}>
-            {isOpenTheme && theme['_id'] === themeId ?
+        {!isEmpty(topics) && topics.map((topic, i, arr) => (
+          <div key={topic['_id']}>
+            {isOpenTheme && topic['_id'] === topicId ?
               <Styles.WrapperTopic>
-                <Styles.iconClose onClick={() => this.handleViewTheme(theme)} />
+                <Styles.iconClose onClick={() => this.handleViewTheme(topic)} />
                 <Topic
-                  theme={theme}
+                  topic={topic}
                   updateTheme={updateTheme}
                   removeTheme={removeTheme}
                   idTechnology={idTechnology}
-                  handleViewTheme={() => this.handleViewTheme(theme)}
+                  handleViewTheme={() => this.handleViewTheme(topic)}
                 />
               </Styles.WrapperTopic>:
               !isOpenTheme ?
               <Styles.Item
-                onClick={() => this.handleViewTheme(theme)}
+                onClick={() => this.handleViewTheme(topic)}
                 borderBottom={(i + 1) === arr.length}
               >
-                {theme.name.substring(0, 30)}
-                <span>{theme.description.substring(0, 80)}...</span>
+                {topic.name.substring(0, 30)}
+                <span>
+                  {topic.description.substring(0, 50)}
+                  {topic.description.length > 50 && '...'}
+                </span>
               </Styles.Item> : null
             }
           </div>
         ))}
-      </Styles.Wrapper>
+      </>
     )
   }
 }
 
 const mapStateToProps = store => ({
   technologies: store.Content.technologies,
-  themes: store.Content.technologyPage.activeTechnology.themes,
-  theme: store.Content.technologyPage.activeTheme,
+  topics: store.Content.technologyPage.activeTechnology.themes,
+  topic: store.Content.technologyPage.activeTheme,
   idTechnology: store.Content.technologyPage.activeTechnology.idTechnology
 });
 
 const mapDispatchToProps = dispatch => ({
   getThemes: (idTechnology) => dispatch(getThemes(idTechnology)),
-  openDataTheme: (theme) => dispatch(openDataTheme(theme)),
-  updateTheme: (id, theme) => dispatch(updateTheme(id, theme)),
+  openDataTheme: (topic) => dispatch(openDataTheme(topic)),
+  updateTheme: (id, topic) => dispatch(updateTheme(id, topic)),
   removeTheme: (id) => dispatch(removeTheme(id)),
-  addTheme: (theme) => dispatch(addTheme(theme))
+  addTheme: (topic) => dispatch(addTheme(topic))
 });
 
 export const Topics = connect(mapStateToProps, mapDispatchToProps)(TopicsContainer);

@@ -1,7 +1,6 @@
 // import styled from 'styled-components';
-import { Wrapper, Caption } from '../../style';
+import { Caption } from '../../style';
 
 export default {
-  Wrapper,
   Caption
 };
