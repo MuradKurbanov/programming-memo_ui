@@ -15,7 +15,6 @@ export class Topic extends React.Component {
     example: '',
     subThemes: [],
     isEditTheme: false,
-    isCreateRef: false,
   };
 
   componentDidMount() {

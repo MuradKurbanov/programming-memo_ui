@@ -30,14 +30,14 @@ const Topic = styled.div`
   font-size: 17px;
 `;
 
-export const Title = styled.div`
+const Title = styled.div`
   height: 20px;
   text-align: left;
   font-size: 19px;
   margin: 20px 0;
 `;
 
-export const Example = styled.div`
+const Example = styled.div`
   width: 100%;
   height: 150px;
   border: 1px solid;
@@ -45,17 +45,17 @@ export const Example = styled.div`
   margin: 20px 0 40px;
 `;
 
-export const SubTheme = styled.div`
+const SubTheme = styled.div`
   cursor: pointer;
   :hover { color: ${Palette.darkBlack} }
 `;
 
-export const WrapperTopic = styled.div`
+const WrapperTopic = styled.div`
   position: relative;
   width: 900px;
 `;
 
-export const iconClose = styled(IoIosClose)`
+const iconClose = styled(IoIosClose)`
   position: absolute;
   right: 50px; 
   top: 15px;
@@ -63,7 +63,7 @@ export const iconClose = styled(IoIosClose)`
   font-size: 1.5em;
 `;
 
-export const iconAdd = styled(IoIosAdd)`
+const iconAdd = styled(IoIosAdd)`
   cursor: pointer;
   font-size: 1.5em;
 `;
