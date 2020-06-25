@@ -15,6 +15,7 @@ export class Topic extends React.Component {
     example: '',
     subThemes: [],
     isEditTheme: false,
+    isExpand: false,
   };
 
   componentDidMount() {
@@ -74,11 +75,21 @@ export class Topic extends React.Component {
     this.setState({ subThemes: [...this.state.subThemes, { subName: '', subDescription: '', subExample: '' }] });
   };
 
+  expandEditor = () => {
+    this.setState({isExpand: !this.state.isExpand });
+  }
+
   addOrEditTheme = () => (
     <Styles.Topic>
       <Input autoFocus placeholder='Название темы' value={this.state.name} handleChange={this.handleChangeName}/>
       <TextArea placeholder='Описание темы' value={this.state.description} handleChange={this.handleChangeDescription}/>
-      <CodeEditor onChange={this.changeCodeEditor} example={this.state.example} />
+      <Styles.WrapperCodeEditor isExpand={this.state.isExpand}>
+        {this.state.isExpand ?
+          <Styles.IconCrop onClick={this.expandEditor} /> :
+          <Styles.IconExpand onClick={this.expandEditor} />
+        }
+        <CodeEditor isExpand={this.state.isExpand} onChange={this.changeCodeEditor} example={this.state.example} />
+      </Styles.WrapperCodeEditor>
 
       {this.state.subThemes && this.state.subThemes.map((subTheme, i) =>
         <div key={i}>
@@ -110,13 +121,19 @@ export class Topic extends React.Component {
     }
     return (
       <Styles.Topic>
-        <Styles.Title>{name}</Styles.Title>
-        {description}
-        <CodeEditor onChange={this.changeCodeEditor} example={this.state.example} />
+        <Styles.Name>{name}</Styles.Name>
+        <Styles.Description>{description}</Styles.Description>
+        <Styles.WrapperCodeEditor isExpand={this.state.isExpand}>
+          {this.state.isExpand ?
+            <Styles.IconCrop onClick={this.expandEditor} /> :
+            <Styles.IconExpand onClick={this.expandEditor} />
+          }
+          <CodeEditor isExpand={this.state.isExpand} onChange={this.changeCodeEditor} example={this.state.example} />
+        </Styles.WrapperCodeEditor>
         {subThemes && subThemes.map((subTheme, i) =>
           <div key={i}>
-            <Styles.Title>{subTheme.subName}</Styles.Title>
-            {subTheme.subDescription}
+            <Styles.Name>{subTheme.subName}</Styles.Name>
+            <Styles.Description>{subTheme.subDescription}</Styles.Description>
             <CodeEditor onChange={newValue => this.changeCodeEditor(newValue, i, true)} example={subTheme.subExample} />
           </div>
         )}

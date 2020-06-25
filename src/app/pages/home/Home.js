@@ -55,7 +55,7 @@ class HomeComponent extends React.Component {
 
   render() {
     return (
-      <Style.Flex justifyContent='flex-start' style={{marginTop: '100px'}}>
+      <Style.Home>
         <Style.StaticTitle>Here you can</Style.StaticTitle>
         {this.state.contentAnimation &&
           <Style.Animation>
@@ -67,7 +67,7 @@ class HomeComponent extends React.Component {
           </Style.FinalAnimation>
         }
         <Style.Cursor isRunAnimation={this.state.isRunAnimation} />
-      </Style.Flex>
+      </Style.Home>
     )
   }
 }

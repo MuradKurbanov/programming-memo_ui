@@ -20,7 +20,7 @@ const Input = styled.input.attrs(() => ({
   border-bottom: 1px solid ${({require}) => require ? Palette.red : Palette.darkSilver};
   padding-left: 3px;
   font-size: 17px;
-  color: ${Palette.darkSilver};
+  color: ${Palette.lightBlack};
   background: none;
   ::placeholder {
     color: silver;

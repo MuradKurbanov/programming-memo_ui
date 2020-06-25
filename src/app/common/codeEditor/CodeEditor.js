@@ -16,6 +16,9 @@ class Iframe extends React.Component {
   componentDidMount() {
     const node = this.ref.current.contentDocument;
     node.writeln("<script>" + this.props.example + "</script>");
+    if (node.body) {
+      node.body.style.fontFamily = 'Roboto, sans-serif';
+    }
     node.body && this.setState({ isValid: !!node.body.innerHTML })
     console.clear();
   }
@@ -25,13 +28,20 @@ class Iframe extends React.Component {
     return (
       <Styles.Iframe isValid={isValid}>
         {isValid ? 'valid' : 'invalid'}
-        <iframe width='100%' height='100%' marginHeight={0} marginWidth={0} title='result' ref={this.ref}/>
+        <iframe
+          width='100%'
+          height='100%'
+          marginHeight={0}
+          marginWidth={0}
+          title='result'
+          ref={this.ref}
+        />
       </Styles.Iframe>
     )
   }
 }
 
-const CodeEditor = ({onChange, example}) => (
+const CodeEditor = ({onChange, example, isExpand}) => (
   <>
     <AceEditor
       mode='javascript'
@@ -39,9 +49,9 @@ const CodeEditor = ({onChange, example}) => (
       onChange={onChange}
       placeholder='document.write(number);'
       fontSize={14}
-      style={{marginTop: '20px'}}
+      style={{marginTop: '10px', maxHeight: '250px'}}
       width='100%'
-      height='250px'
+      height='100%'
       name="EXAMPLE_CODE"
       editorProps={{$blockScrolling: Infinity}}
       enableBasicAutocompletion={true}
@@ -50,11 +60,13 @@ const CodeEditor = ({onChange, example}) => (
       value={`${example}`}
       setOptions={{ showLineNumbers: Infinity, tabSize: 2 }}
     />
-    <Iframe
-      example={example}
-      reset={() => this.forceUpdate()}
-      key={Math.random()}
-    />
+    {!isExpand &&
+      <Iframe
+        example={example}
+        reset={() => this.forceUpdate()}
+        key={Math.random()}
+      />
+    }
   </>
 )
 export default CodeEditor;
