@@ -8,8 +8,6 @@ import { Roots } from '../../../backend/roots';
 import Styles from './style';
 
 class MenuComponent extends React.Component {
-  state = {};
-
   componentDidMount() {
     this.props.getTechnologies('');
   }
@@ -31,42 +29,36 @@ class MenuComponent extends React.Component {
   };
 
   render() {
-    const { isSubMenu } = this.state;
-    const { isWrapperBlack, technologies } = this.props;
+    const { technologies } = this.props;
 
     return (
-      <Styles.Wrapper black={isWrapperBlack} menu>
-        <Styles.Flex alignItems='flex-start' justifyContent='space-between'>
-          <Link to='/'>PM</Link>
-          <Styles.Flex style={{width: '340px'}} alignItems='flex-start' justifyContent='space-between'>
-            <Styles.Menu>
-              {Roots.map((root, i) => (
-                root.subMenu && root.menu ?
-                  <Link key={i} onMouseEnter={this.viewSubmenu} onMouseLeave={this.hideSubmenu} to={`${root.path}`}>
-                    {root.title}
-                  </Link> :
-                  root.menu && <Link key={i} to={`${root.path}`}>{root.title}</Link>
-              ))}
-              {isSubMenu && this.subMenu(technologies)}
-            </Styles.Menu>
-            <div>
-              {Roots.map((root, i) => root['socialNetwork'] &&
-                <Link style={{marginLeft: '20px'}} key={i} to={`${root.path}`}>{root.title}</Link>)}
-            </div>
-          </Styles.Flex>
-        </Styles.Flex>
-      </Styles.Wrapper>
+      <Styles.Menu>
+        <Link to='/'>PM</Link>
+        <Styles.Roots>
+          {Roots.map((root, i) => (
+            root.subMenu && root.menu ?
+              <Link key={i} onMouseEnter={this.viewSubmenu} onMouseLeave={this.hideSubmenu} to={`${root.path}`}>
+                {root.title}
+              </Link> :
+              root.menu && <Link key={i} to={`${root.path}`}>{root.title}</Link>
+          ))}
+          {this.state && this.state.isSubMenu && this.subMenu(technologies)}
+        </Styles.Roots>
+        <Styles.SocialLinks>
+          {Roots.map((root, i) => root['socialNetwork'] &&
+            <Link key={i} to={`${root.path}`}>{root.title}</Link>)}
+        </Styles.SocialLinks>
+      </Styles.Menu>
     )
   }
 }
 
 
 const mapDispatchToProps = dispatch => ({
-  getTechnologies: (id) => dispatch(getTechnologies(id)),
+  getTechnologies: id => dispatch(getTechnologies(id)),
 });
 
 const mapStateToProps = (store) => ({
-  isWrapperBlack: store.Common.isWrapperBlack,
   technologies: store.Content.technologies,
   themes: store.Content.technologyPage.activeTechnology.themes,
 });

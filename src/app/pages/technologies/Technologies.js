@@ -102,7 +102,7 @@ class TechnologiesContainer extends React.Component {
     const { isEdit, idTechnology, alertByTechnologyId } = this.state;
 
     return (
-      <Styles.Wrapper style={{paddingBottom: '100px'}}>
+      <>
         <Styles.Left>
           {technologies && technologies.map(technology =>
             <Scrollchor animate={{offset: -300, duration: 500}} key={technology['_id']} to={`${technology['_id']}`}>
@@ -118,7 +118,10 @@ class TechnologiesContainer extends React.Component {
               {isEdit && idTechnology === technology['_id'] ? this.addOrEdit() :
                 <>
                   <Styles.Name onClick={() => this.openTechnology(technology['_id'])}>{technology.name}</Styles.Name>
-                  <Styles.Description>{technology.description.substring(0,230)}...</Styles.Description>
+                  <Styles.Description>
+                    {technology.description.substring(0,230)}
+                    {technology.description.length > 230 && '...'}
+                  </Styles.Description>
                   <Styles.Flex justifyContent='space-between'>
                     <Styles.Flex justifyContent='flex-start'>
                       <Button margin='0 20px 0 0' title='Редактировать' handleClick={() => this.editTechnology(technology)} />
@@ -132,7 +135,7 @@ class TechnologiesContainer extends React.Component {
             </Styles.TechnoBlock>
           )}
         </Styles.Right>
-      </Styles.Wrapper>
+      </>
     );
   }
 }

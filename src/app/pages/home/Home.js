@@ -55,21 +55,19 @@ class HomeComponent extends React.Component {
 
   render() {
     return (
-      <Style.Wrapper black>
-        <Style.Flex justifyContent='flex-start' style={{marginTop: '100px'}}>
-          <Style.StaticTitle>Here you can</Style.StaticTitle>
-          {this.state.contentAnimation &&
-            <Style.Animation>
-              &nbsp;{this.state.contentAnimation}
-            </Style.Animation>}
-          {this.state.isFinalAnimation &&
-            <Style.FinalAnimation>
-              &nbsp;good luck and console.log("Hello World") <span aria-label='emoji' role="img">🙃</span>
-            </Style.FinalAnimation>
-          }
-          <Style.Cursor isRunAnimation={this.state.isRunAnimation} />
-        </Style.Flex>
-      </Style.Wrapper>
+      <Style.Flex justifyContent='flex-start' style={{marginTop: '100px'}}>
+        <Style.StaticTitle>Here you can</Style.StaticTitle>
+        {this.state.contentAnimation &&
+          <Style.Animation>
+            &nbsp;{this.state.contentAnimation}
+          </Style.Animation>}
+        {this.state.isFinalAnimation &&
+          <Style.FinalAnimation>
+            &nbsp;good luck and console.log("Hello World") <span aria-label='emoji' role="img">🙃</span>
+          </Style.FinalAnimation>
+        }
+        <Style.Cursor isRunAnimation={this.state.isRunAnimation} />
+      </Style.Flex>
     )
   }
 }

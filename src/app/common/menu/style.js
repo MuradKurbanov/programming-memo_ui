@@ -1,7 +1,16 @@
 import styled from 'styled-components';
-import { Wrapper, Flex, Palette } from '../../style';
+import { Flex, Palette } from '../../style';
 
-const Menu = styled.div`
+const Menu = styled(Flex)`
+  margin-bottom: 100px;
+  justify-content: space-between;
+  align-items: flex-start;
+  > a:first-child {
+    flex-grow: 1;
+  }
+`;
+
+const Roots = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9,10 +18,10 @@ const Menu = styled.div`
     height: 22px;
     min-width: 100px;
     margin-bottom: 5px;
-    transition: border-width 0.8s linear;
+    border-bottom: ${Palette.purple};
+    transition: border-bottom 0.8s linear;
     &:hover {
-      border-bottom: solid 1px ${Palette.purple};
-      border-width: 10px;
+      border-bottom: solid 10px ${Palette.purple};
     }
   }
 `;
@@ -33,9 +42,20 @@ const SubMenu = styled.div`
   }
 `;
 
+const SocialLinks = styled.div`
+  margin-left: 60px;  
+  > a {
+    margin-left: 20px;  
+  }
+  @media (max-width: 1024px) {
+    margin-left: 0;
+  }
+`;
+
 export default {
-  Wrapper,
   Flex,
   Menu,
+  Roots,
   SubMenu,
+  SocialLinks
 }
