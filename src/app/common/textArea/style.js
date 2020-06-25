@@ -9,7 +9,9 @@ const Textarea = styled.textarea`
   font-size: 17px;
   padding: 3px;
   background: none;
-  color: ${Palette.darkSilver};
+  color: ${Palette.lightBlack};
+  line-height: 1.3;
+  font-family: larsseit, sans-serif;
   ::placeholder {
     color: silver;
     font-size: 15px;

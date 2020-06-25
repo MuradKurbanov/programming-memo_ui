@@ -1,12 +1,24 @@
 import styled, { keyframes } from 'styled-components';
 import { Wrapper, Flex, Palette } from '../../style';
 
+const Home = styled(Flex)`
+  margin-top: 200px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+`;
+
 const text = styled.div`
   font-size: 46px;
   font-weight: 600;
   line-height: 1.25;
   letter-spacing: -.035em;
-  word-spacing: 4px;
+  word-spacing: 3px;
+  @media (max-width: 1024px) {
+     font-size: 25px;
+  }
+  @media (max-width: 720px) {
+     font-size: 15px;
+  }
 `;
 
 const StaticTitle = styled(text)`
@@ -57,11 +69,16 @@ const Cursor = styled.div`
   margin: 10px 0 10px 15px;
   background: ${Palette.white};
   animation: ${({isRunAnimation}) => isRunAnimation && CursorRepeat} 1s linear infinite;
+  @media (max-width: 1024px) {
+    width: 5px;
+    height: 23px;
+    margin: 5px 0 5px 10px;
+  }
 `;
 
 export default {
   Wrapper,
-  Flex,
+  Home,
   StaticTitle,
   Animation,
   FinalAnimation,

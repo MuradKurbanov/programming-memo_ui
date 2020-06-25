@@ -1,5 +1,8 @@
 import styled, { createGlobalStyle } from 'styled-components';
 
+import larsseit from '../fonts/larsseit.ttf';
+import futura from '../fonts/futura.otf';
+
 export const Palette = {
   darkBlack: '#292929',
   lightBlack: '#505050',
@@ -20,17 +23,32 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
   html, body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    font-family: larsseit, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: ${Palette.lightBlack};
   }
+  
   #root {
     width: 100%;
     height: auto;
     position: relative;
+  }
+  @font-face {
+    font-family: 'larsseit';
+    src: local('larsseit'), local('larsseit');
+    url(${larsseit}) format('ttf');
+    font-weight: 200;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'futura';
+    src: local('futura'), local('futura');
+    url(${futura}) format('otf');
+    font-weight: 500;
+    font-style: normal;
   }
 `;
 
@@ -44,6 +62,7 @@ export const Container = styled.div`
     color: ${({black}) => black ? Palette.darkSilver : Palette.lightBlack};
     text-decoration: none;
     transition: color 0.3s linear;
+    //font-weight: 100;
     &:hover {
       color: ${({black}) => black ? Palette.lightSilver : Palette.darkBlack};
     }
@@ -66,7 +85,6 @@ export const Wrapper = styled.div`
 
 export const Caption = styled.div`
   font-size: 27px;
-  line-height: 20px;
   text-align: ${({textAlign}) => textAlign || 'center' };
   color: ${Palette.lightBlack};
 `;

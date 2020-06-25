@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import { Caption, Flex, Palette } from '../../style';
-import { IoIosAdd, IoIosClose } from 'react-icons/io';
+import { IoIosAdd, IoIosClose, IoIosMore, IoIosRemove } from 'react-icons/io';
 
 const TechnologyName = styled(Caption)`
   text-align: left;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 `;
 
 const TechnologyDescription = styled.div`
   max-width: 900px;
-  margin-bottom: 30px;
+  margin-bottom: 70px;
 `;
 
 const WrapperTopic = styled.div`
@@ -49,11 +49,42 @@ const Topic = styled.div`
   font-size: 17px;
 `;
 
-const Title = styled.div`
-  height: 20px;
+const WrapperCodeEditor = styled.div`
+  position: relative;
+  height: ${({isExpand}) => isExpand ? '50px' : '500px'};
+`;
+
+const IconCrop = styled(IoIosMore)`
+  position: absolute;
+  right: 50px; 
+  top: 15px;
+  cursor: pointer;
+  color: ${Palette.white};
+  z-index: 1;
+  font-size: 2em;
+`;
+
+const IconExpand = styled(IoIosRemove)`
+  position: absolute;
+  right: 50px; 
+  top: 15px;
+  cursor: pointer;
+  color: ${Palette.white};
+  z-index: 1;
+  font-size: 2em;
+`;
+
+const Name = styled.div`
   text-align: left;
   font-size: 19px;
-  margin: 20px 0;
+  margin: 20px 0 10px 0;
+  color: ${Palette.lightBlack};
+`;
+
+const Description = styled.div`
+  font-size: 17px;
+  line-height: 1.3;
+  color: ${Palette.lightBlack};
 `;
 
 const Example = styled.div`
@@ -89,7 +120,11 @@ export default {
   WrapperTopic,
   Item,
   Topic,
-  Title,
+  WrapperCodeEditor,
+  IconCrop,
+  IconExpand,
+  Name,
+  Description,
   Example,
   SubTheme,
   iconClose,
