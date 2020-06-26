@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { Caption, Flex, Palette } from '../../style';
-import { IoIosAdd, IoIosClose, IoIosMore, IoIosRemove } from 'react-icons/io';
+import { IoIosAdd, IoIosClose } from 'react-icons/io';
 
 const TechnologyName = styled(Caption)`
   text-align: left;
@@ -49,42 +49,20 @@ const Topic = styled.div`
   font-size: 17px;
 `;
 
-const WrapperCodeEditor = styled.div`
-  position: relative;
-  height: ${({isExpand}) => isExpand ? '50px' : '500px'};
-`;
-
-const IconCrop = styled(IoIosMore)`
-  position: absolute;
-  right: 50px; 
-  top: 15px;
-  cursor: pointer;
-  color: ${Palette.white};
-  z-index: 1;
-  font-size: 2em;
-`;
-
-const IconExpand = styled(IoIosRemove)`
-  position: absolute;
-  right: 50px; 
-  top: 15px;
-  cursor: pointer;
-  color: ${Palette.white};
-  z-index: 1;
-  font-size: 2em;
-`;
-
 const Name = styled.div`
   text-align: left;
   font-size: 19px;
   margin: 20px 0 10px 0;
   color: ${Palette.lightBlack};
+  font-weight: 500;
 `;
 
 const Description = styled.div`
   font-size: 17px;
   line-height: 1.3;
   color: ${Palette.lightBlack};
+  font-weight: 500;
+  white-space: pre-line;
 `;
 
 const Example = styled.div`
@@ -120,9 +98,6 @@ export default {
   WrapperTopic,
   Item,
   Topic,
-  WrapperCodeEditor,
-  IconCrop,
-  IconExpand,
   Name,
   Description,
   Example,
