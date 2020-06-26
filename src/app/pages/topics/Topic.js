@@ -15,7 +15,6 @@ export class Topic extends React.Component {
     example: '',
     subThemes: [],
     isEditTheme: false,
-    isExpand: false,
   };
 
   componentDidMount() {
@@ -75,21 +74,11 @@ export class Topic extends React.Component {
     this.setState({ subThemes: [...this.state.subThemes, { subName: '', subDescription: '', subExample: '' }] });
   };
 
-  expandEditor = () => {
-    this.setState({isExpand: !this.state.isExpand });
-  }
-
   addOrEditTheme = () => (
     <Styles.Topic>
       <Input autoFocus placeholder='Название темы' value={this.state.name} handleChange={this.handleChangeName}/>
       <TextArea placeholder='Описание темы' value={this.state.description} handleChange={this.handleChangeDescription}/>
-      <Styles.WrapperCodeEditor isExpand={this.state.isExpand}>
-        {this.state.isExpand ?
-          <Styles.IconCrop onClick={this.expandEditor} /> :
-          <Styles.IconExpand onClick={this.expandEditor} />
-        }
-        <CodeEditor isExpand={this.state.isExpand} onChange={this.changeCodeEditor} example={this.state.example} />
-      </Styles.WrapperCodeEditor>
+      <CodeEditor onChange={this.changeCodeEditor} example={this.state.example} />
 
       {this.state.subThemes && this.state.subThemes.map((subTheme, i) =>
         <div key={i}>
@@ -99,7 +88,7 @@ export class Topic extends React.Component {
           <TextArea
             placeholder='Описание подтемы' value={subTheme.subDescription}
             handleChange={event => this.handleChangeSubDescription(event, i)} />
-          <CodeEditor onChange={newValue => this.changeCodeEditor(newValue, i, true)} example={subTheme.subExample} />
+          <CodeEditor isShowEditor onChange={newValue => this.changeCodeEditor(newValue, i, true)} example={subTheme.subExample} />
         </div>
       )}
       <Styles.Flex justifyContent='space-between'>
@@ -123,18 +112,12 @@ export class Topic extends React.Component {
       <Styles.Topic>
         <Styles.Name>{name}</Styles.Name>
         <Styles.Description>{description}</Styles.Description>
-        <Styles.WrapperCodeEditor isExpand={this.state.isExpand}>
-          {this.state.isExpand ?
-            <Styles.IconCrop onClick={this.expandEditor} /> :
-            <Styles.IconExpand onClick={this.expandEditor} />
-          }
-          <CodeEditor isExpand={this.state.isExpand} onChange={this.changeCodeEditor} example={this.state.example} />
-        </Styles.WrapperCodeEditor>
+        <CodeEditor onChange={this.changeCodeEditor} example={this.state.example} />
         {subThemes && subThemes.map((subTheme, i) =>
           <div key={i}>
             <Styles.Name>{subTheme.subName}</Styles.Name>
             <Styles.Description>{subTheme.subDescription}</Styles.Description>
-            <CodeEditor onChange={newValue => this.changeCodeEditor(newValue, i, true)} example={subTheme.subExample} />
+            <CodeEditor isShowEditor onChange={newValue => this.changeCodeEditor(newValue, i, true)} example={subTheme.subExample} />
           </div>
         )}
         <Styles.Flex justifyContent='space-between'>
