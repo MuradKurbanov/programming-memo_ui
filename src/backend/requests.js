@@ -9,16 +9,16 @@ const http = axios.create({
 
 // Topic
 // Create new theme with idTechnology
-export const addThemeApi = (topic) => http.post(`/themes-service/`, topic);
+export const addThemeApi = (topic) => http.post(`/topics-service/`, topic);
 
 // Read topics by idTechnology
-export const getThemesApi = (idTechnology) => http.get(`/themes-service/${idTechnology}?timestamp=${Date.now()}`, { cache: false });
+export const getThemesApi = (idTechnology) => http.get(`/topics-service/${idTechnology}?timestamp=${Date.now()}`, { cache: false });
 
 // Update theme by id
-export const editThemeApi = (id, topic) => http.put(`/themes-service/${id}`, topic);
+export const editThemeApi = (id, topic) => http.put(`/topics-service/${id}`, topic);
 
 //  Delete theme by id
-export const removeThemeApi = (id) => http.delete(`/themes-service/${id}`);
+export const removeThemeApi = (id) => http.delete(`/topics-service/${id}`);
 
 
 // Technology

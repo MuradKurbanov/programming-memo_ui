@@ -4,7 +4,7 @@ import larsseit from '../fonts/larsseit.ttf';
 import futura from '../fonts/futura.otf';
 
 export const Palette = {
-  darkBlack: '#292929',
+  darkBlack: '#212121',
   lightBlack: '#505050',
   darkSilver: '#6d6d6d',
   lightSilver: '#efefef',
