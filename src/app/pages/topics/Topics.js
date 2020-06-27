@@ -59,54 +59,59 @@ class TopicsContainer extends React.Component {
     const { caption, description, isOpenTheme, topicId } = this.state;
 
     return (
-      <>
+      <Styles.Flex justifyContent='space-between' alignItems='flex-start'>
+        <div>
+          <Styles.TechnologyName>{caption}</Styles.TechnologyName>
+          <Styles.TechnologyDescription>{description}</Styles.TechnologyDescription>
 
-        <Styles.TechnologyName>{caption}</Styles.TechnologyName>
-        <Styles.TechnologyDescription>{description}</Styles.TechnologyDescription>
-
-        {isOpenTheme && !topicId ?
-          <Styles.WrapperTopic>
-            <Styles.iconClose onClick={() => this.handleViewTheme('')} />
-            <Topic
-              addTheme={addTheme}
-              idTechnology={idTechnology}
-              handleViewTheme={() => this.handleViewTheme('')}
-            />
-          </Styles.WrapperTopic>:
-          !isOpenTheme ?
-            <Styles.Item borderBottom={isEmpty(topics)} onClick={() => this.handleViewTheme('')}>
-              Добавить новую тему <Styles.iconAdd />
-            </Styles.Item> : null
-        }
-
-        {!isEmpty(topics) && topics.map((topic, i, arr) => (
-          <div key={topic['_id']}>
-            {isOpenTheme && topic['_id'] === topicId ?
-              <Styles.WrapperTopic>
-                <Styles.iconClose onClick={() => this.handleViewTheme(topic)} />
-                <Topic
-                  topic={topic}
-                  updateTheme={updateTheme}
-                  removeTheme={removeTheme}
-                  idTechnology={idTechnology}
-                  handleViewTheme={() => this.handleViewTheme(topic)}
-                />
-              </Styles.WrapperTopic>:
-              !isOpenTheme ?
-              <Styles.Item
-                onClick={() => this.handleViewTheme(topic)}
-                borderBottom={(i + 1) === arr.length}
-              >
-                {topic.name.substring(0, 30)}
-                <span>
-                  {topic.description.substring(0, 50)}
-                  {topic.description.length > 50 && '...'}
-                </span>
+          {isOpenTheme && !topicId ?
+            <Styles.WrapperTopic>
+              <Styles.iconClose onClick={() => this.handleViewTheme('')} />
+              <Topic
+                addTheme={addTheme}
+                idTechnology={idTechnology}
+                handleViewTheme={() => this.handleViewTheme('')}
+              />
+            </Styles.WrapperTopic>:
+            !isOpenTheme ?
+              <Styles.Item borderBottom={isEmpty(topics)} onClick={() => this.handleViewTheme('')}>
+                Добавить новую тему <Styles.iconAdd />
               </Styles.Item> : null
-            }
-          </div>
-        ))}
-      </>
+          }
+
+          {!isEmpty(topics) && topics.map((topic, i, arr) => (
+            <div key={topic['_id']}>
+              {isOpenTheme && topic['_id'] === topicId ?
+                <Styles.WrapperTopic>
+                  <Styles.iconClose onClick={() => this.handleViewTheme(topic)} />
+                  <Topic
+                    topic={topic}
+                    updateTheme={updateTheme}
+                    removeTheme={removeTheme}
+                    idTechnology={idTechnology}
+                    handleViewTheme={() => this.handleViewTheme(topic)}
+                  />
+                </Styles.WrapperTopic>:
+                !isOpenTheme ?
+                  <Styles.Item
+                    onClick={() => this.handleViewTheme(topic)}
+                    borderBottom={(i + 1) === arr.length}
+                  >
+                    {topic.name.substring(0, 30)}
+                    <span>
+                  {topic.description.substring(0, 50)}
+                      {topic.description.length > 50 && '...'}
+                </span>
+                  </Styles.Item> : null
+              }
+            </div>
+          ))}
+        </div>
+        <Styles.Right>
+          <Styles.SourceName>Источники</Styles.SourceName>
+          <Styles.SourceLink>https://learn.javascript.ru/js</Styles.SourceLink>
+        </Styles.Right>
+      </Styles.Flex>
     )
   }
 }

@@ -91,6 +91,21 @@ const iconAdd = styled(IoIosAdd)`
   font-size: 1.5em;
 `;
 
+const Right = styled.div`
+  padding: 150px 50px;
+  margin: 0 auto;
+`;
+
+const SourceName = styled.div`
+  margin-bottom: 30px;
+  font-size: 20px;
+
+`;
+
+const SourceLink = styled.div`
+
+`;
+
 export default {
   Flex,
   TechnologyName,
@@ -103,5 +118,8 @@ export default {
   Example,
   SubTheme,
   iconClose,
-  iconAdd
+  iconAdd,
+  Right,
+  SourceName,
+  SourceLink
 }
