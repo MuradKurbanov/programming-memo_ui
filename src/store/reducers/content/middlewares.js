@@ -33,29 +33,29 @@ export const deleteTechnology = (id) => (dispatch) => {
 };
 
 // Themes
-export const getThemes = (idTechnology) => dispatch => {
-  getThemesApi(idTechnology)
+export const getThemes = (technology) => dispatch => {
+  getThemesApi(technology['_id'])
     .then(res => res.data)
-    .then(themes => dispatch(getThemesSuccess({themes: [...themes], idTechnology })))
+    .then(themes => dispatch(getThemesSuccess({ themes: [...themes], technology })))
 };
 
 export const addTheme = (theme) => (dispatch, getStore) => {
-  const idTechnology = getStore().Content.technologyPage.activeTechnology.idTechnology;
+  const technology = getStore().Content.technologyPage.activeTechnology;
   addThemeApi(theme)
     .then(dispatch(addThemeSuccess()))
-    .then(dispatch(getThemes(idTechnology)))
+    .then(dispatch(getThemes(technology)))
 };
 
 export const removeTheme = (id) => (dispatch, getStore) => {
-  const idTechnology = getStore().Content.technologyPage.activeTechnology.idTechnology;
+  const technology = getStore().Content.technologyPage.activeTechnology;
   removeThemeApi(id)
     .then(dispatch(removeThemeSuccess()))
-    .then(dispatch(getThemes(idTechnology)))
+    .then(dispatch(getThemes(technology)))
 };
 
 export const updateTheme = (id, theme) => (dispatch, getStore) => {
-  const idTechnology = getStore().Content.technologyPage.activeTechnology.idTechnology;
+  const technology = getStore().Content.technologyPage.activeTechnology;
   editThemeApi(id, theme)
     .then(dispatch(updateThemeSuccess()))
-    .then(dispatch(getThemes(idTechnology)))
+    .then(dispatch(getThemes(technology)))
 };
